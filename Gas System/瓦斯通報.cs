@@ -12,19 +12,20 @@ using System.Configuration;
 
 namespace Gas_System
 {
-    public partial class 計量登錄 : Form
+    public partial class 瓦斯通報 : Form
     {
         //連接資料庫
         private readonly string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
 
-        public 計量登錄()
+        public 瓦斯通報()
         {
             InitializeComponent();
         }
-        private void 計量登錄_Load(object sender, EventArgs e)
+
+        private void 瓦斯通報_Load(object sender, EventArgs e)
         {
             //設定dataGridView與資料表連接
-            string query = "SELECT * FROM `iot`";
+            string query = "SELECT * FROM `company`";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
@@ -32,27 +33,26 @@ namespace Gas_System
                     DataTable table = new DataTable();
                     adapter.Fill(table);
 
-                    dataGridView1.DataSource = table;
+                 //   dataGridView1.DataSource = table;
                 }
             }
         }
 
         private void add_Click(object sender, EventArgs e)
         {
-            //開啟計量器(iot)資料頁面
-            //iot登錄資料的欄位目前也還不完全，要跟德宏確認
+            //開啟瓦斯行資料頁面
             //新增一筆資料
-            iot f1;
-            f1 = new iot();
+            company f1;
+            f1 = new company();
             f1.ShowDialog();
         }
 
         private void edit_Click(object sender, EventArgs e)
         {
-            //開啟計量器(iot)資料頁面
+            //開啟基本用戶資料頁面
             //編輯修改某筆資料
-            iot f1;
-            f1 = new iot();
+            company f1;
+            f1 = new company();
             f1.ShowDialog();
         }
 
@@ -65,12 +65,12 @@ namespace Gas_System
                 if (result == DialogResult.Yes)
                 {
                     string id = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                    string query = "DELETE FROM `iot` WHERE `ID` = @ID";
+                    string query = "DELETE FROM `company` WHERE `Company_ID` = @Company_ID";
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         using (MySqlCommand command = new MySqlCommand(query, connection))
                         {
-                            command.Parameters.AddWithValue("@ID", id);
+                            command.Parameters.AddWithValue("@Company_ID", id);
                             connection.Open();
                             int rowsAffected = command.ExecuteNonQuery();
                             connection.Close();
@@ -93,17 +93,16 @@ namespace Gas_System
             //設定可搜索資料欄位的範圍
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                string query = "SELECT * FROM `iot` WHERE IOT_ID LIKE @IOT_ID OR Coustomer_ID LIKE @Coustomer_ID OR Coustomer_Name LIKE @Coustomer_Name OR IP LIKE @IP";
+                string query = "SELECT * FROM `company` WHERE Company_ID LIKE @Company_ID OR Company_Name LIKE @Company_Name OR Company_City LIKE @Company_City";
                 //string query = "SELECT * FROM `iot` WHERE IOT_ID LIKE @IOT_ID OR Coustomer_ID LIKE @Coustomer_ID OR Coustomer_Name LIKE @Coustomer_Name OR IP LIKE @IP";
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@IOT_ID", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@Coustomer_ID", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@Coustomer_Name", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@IP", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Company_ID", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Company_Name", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Company_City", "%" + searchTerm + "%");
 
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
                         {
@@ -131,7 +130,7 @@ namespace Gas_System
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM iot", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM company", conn);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
 
@@ -139,6 +138,16 @@ namespace Gas_System
                 dataGridView1.DataSource = dt;
                 conn.Close();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

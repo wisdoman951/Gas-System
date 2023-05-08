@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace Gas_System
 {
     public partial class bonus_points : Form
     {
         //連接資料庫
-        string connectionString = "Server=localhost;Database=new_test;Uid=root;Pwd=mysqlyu229";
+        string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
         public bonus_points()
         {
             InitializeComponent();

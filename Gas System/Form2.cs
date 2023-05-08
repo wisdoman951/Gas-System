@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace Gas_System
 {
     public partial class Form2 : Form
     {
         //連接資料庫
-        private readonly string connectionString = "Server=localhost;Database=new_test;Uid=root;Pwd=89010607";
+        private readonly string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
 
         public Form2()
         {
@@ -136,7 +137,14 @@ namespace Gas_System
             //開啟對應分頁
             openChildForm(new 計量登錄());
         }
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //開啟安全存量通知的頁面
+            //主要功能是 顯示低於預設瓦斯用量用戶，然後每日提醒用戶、瓦斯行
+            //通知頻率/時間：用戶在App可設定選擇低於安全存量3.5、2.5kg下拉式選項之通知天數頻率，後台依照用戶設定做通知，低於安全存量 2kg 時，系統將會每日通知兩次
+            openChildForm(new 瓦斯通報());
 
+        }
         private void form_pl_Paint(object sender, PaintEventArgs e)
         {
             //連接資料表
@@ -249,11 +257,6 @@ namespace Gas_System
             //瓦斯行明細查詢(具體要查什麼沒有明確...之後要跟德宏確認)
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //開啟安全存量通知的頁面
-            //主要功能是 顯示低於預設瓦斯用量用戶，然後每日提醒用戶、瓦斯行
-            //通知頻率/時間：用戶在App可設定選擇低於安全存量3.5、2.5kg下拉式選項之通知天數頻率，後台依照用戶設定做通知，低於安全存量 2kg 時，系統將會每日通知兩次
-        }
+        
     }
 }

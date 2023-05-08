@@ -1,7 +1,7 @@
 ﻿
 namespace Gas_System
 {
-    partial class 瓦斯桶登錄
+    partial class 瓦斯通報
     {
         /// <summary>
         /// Required designer variable.
@@ -30,9 +30,6 @@ namespace Gas_System
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.delete = new System.Windows.Forms.Button();
-            this.edit = new System.Windows.Forms.Button();
-            this.add = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.refreshButton = new System.Windows.Forms.Button();
             this.search = new System.Windows.Forms.Button();
@@ -52,56 +49,11 @@ namespace Gas_System
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(29, 134);
+            this.dataGridView1.Location = new System.Drawing.Point(29, 110);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(972, 579);
+            this.dataGridView1.Size = new System.Drawing.Size(972, 589);
             this.dataGridView1.TabIndex = 19;
-            // 
-            // delete
-            // 
-            this.delete.BackColor = System.Drawing.Color.IndianRed;
-            this.delete.FlatAppearance.BorderSize = 0;
-            this.delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.delete.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delete.ForeColor = System.Drawing.Color.White;
-            this.delete.Location = new System.Drawing.Point(207, 100);
-            this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(83, 26);
-            this.delete.TabIndex = 18;
-            this.delete.Text = "刪除";
-            this.delete.UseVisualStyleBackColor = false;
-            this.delete.Click += new System.EventHandler(this.delete_Click);
-            // 
-            // edit
-            // 
-            this.edit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
-            this.edit.FlatAppearance.BorderSize = 0;
-            this.edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.edit.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.edit.ForeColor = System.Drawing.Color.White;
-            this.edit.Location = new System.Drawing.Point(118, 100);
-            this.edit.Name = "edit";
-            this.edit.Size = new System.Drawing.Size(83, 26);
-            this.edit.TabIndex = 17;
-            this.edit.Text = "編輯";
-            this.edit.UseVisualStyleBackColor = false;
-            this.edit.Click += new System.EventHandler(this.edit_Click);
-            // 
-            // add
-            // 
-            this.add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
-            this.add.FlatAppearance.BorderSize = 0;
-            this.add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.add.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.add.ForeColor = System.Drawing.Color.White;
-            this.add.Location = new System.Drawing.Point(29, 100);
-            this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(83, 26);
-            this.add.TabIndex = 15;
-            this.add.Text = "新增";
-            this.add.UseVisualStyleBackColor = false;
-            this.add.Click += new System.EventHandler(this.add_Click);
             // 
             // panel5
             // 
@@ -181,9 +133,9 @@ namespace Gas_System
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(114)))));
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 22);
+            this.label1.Size = new System.Drawing.Size(74, 22);
             this.label1.TabIndex = 0;
-            this.label1.Text = "瓦斯通報功能";
+            this.label1.Text = "瓦斯通報";
             // 
             // button1
             // 
@@ -192,11 +144,11 @@ namespace Gas_System
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(820, 719);
+            this.button1.Location = new System.Drawing.Point(918, 718);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(83, 26);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "全體通報";
+            this.button1.TabIndex = 21;
+            this.button1.Text = "通報所選";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -207,35 +159,32 @@ namespace Gas_System
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(918, 719);
+            this.button2.Location = new System.Drawing.Point(829, 718);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(83, 26);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "通報所選";
+            this.button2.TabIndex = 20;
+            this.button2.Text = "全體通報";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // 瓦斯桶登錄
+            // 瓦斯通報
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1034, 756);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.delete);
-            this.Controls.Add(this.edit);
-            this.Controls.Add(this.add);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "瓦斯桶登錄";
+            this.Name = "瓦斯通報";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "瓦斯桶登錄";
-            this.Load += new System.EventHandler(this.瓦斯桶登錄_Load);
+            this.Text = "瓦斯行登錄";
+            this.Load += new System.EventHandler(this.瓦斯通報_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -248,9 +197,6 @@ namespace Gas_System
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button delete;
-        private System.Windows.Forms.Button edit;
-        private System.Windows.Forms.Button add;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.Button search;

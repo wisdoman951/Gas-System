@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace Gas_System
 {
@@ -28,7 +29,7 @@ namespace Gas_System
         private void button15_Click(object sender, EventArgs e)
         {
             //連接資料庫
-            string connStr = "server=localhost;user=root;password=89010607;database=new_test;";
+            string connStr = ConfigurationManager.AppSettings["ConnectionString"]; ;
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
                 conn.Open();

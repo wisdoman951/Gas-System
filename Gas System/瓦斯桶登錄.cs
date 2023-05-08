@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace Gas_System
 {
     public partial class 瓦斯桶登錄 : Form
     {
         //連接資料庫
-        private readonly string connectionString = "Server=localhost;Database=new_test;Uid=root;Pwd=mysqlyu229";
+        private readonly string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
 
         public 瓦斯桶登錄()
         {
@@ -144,6 +145,16 @@ namespace Gas_System
                 dataGridView1.DataSource = dt;
                 conn.Close();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

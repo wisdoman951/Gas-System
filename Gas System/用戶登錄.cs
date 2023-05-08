@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace Gas_System
 {
     public partial class 用戶登錄 : Form
     {
         //連接資料庫
-        string connectionString = "server=localhost;user=root;password=89010607;database=new_test;";
+        private readonly string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
 
         public 用戶登錄()
         {
