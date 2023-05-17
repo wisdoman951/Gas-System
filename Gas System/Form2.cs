@@ -257,6 +257,27 @@ namespace Gas_System
             //瓦斯行明細查詢(具體要查什麼沒有明確...之後要跟德宏確認)
         }
 
-        
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
+
+                // Access the data in the selected row and autofill other fields in the form
+                string orderId = selectedRow.Cells["Order_ID"].Value.ToString();
+                string customerName = selectedRow.Cells["Customer_ID"].Value.ToString();
+                string customerPhone = selectedRow.Cells["Customer_Phone"].Value.ToString();
+                string deliveryTime = selectedRow.Cells["Delivery_Time"].Value.ToString();
+                string deliveryAddress = selectedRow.Cells["Delivery_Address"].Value.ToString();
+
+                // Autofill the other fields(Textbox) in the form
+                OrderID.Text = orderId;
+                CustomerName.Text = customerName;
+                CustomerPhone.Text = customerPhone;
+                DeliveryTime.Text = deliveryTime;
+                DeliveryAddress.Text = deliveryAddress;
+
+            }
+        }
     }
 }
