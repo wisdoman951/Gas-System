@@ -25,7 +25,7 @@ namespace Gas_System
         private void 用戶登錄_Load(object sender, EventArgs e)
         {
             //設定dataGridView與資料表連接
-            string query = "SELECT * FROM `coustomer`";
+            string query = "SELECT * FROM `customer`";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
@@ -65,7 +65,7 @@ namespace Gas_System
                 if (result == DialogResult.Yes)
                 {
                     string id = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                    string query = "DELETE FROM `coustomer` WHERE `ID` = @ID";
+                    string query = "DELETE FROM `customer` WHERE `ID` = @ID";
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -97,16 +97,15 @@ namespace Gas_System
             //設定可搜索資料欄位的範圍
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                string query = "SELECT * FROM `coustomer` WHERE Coustomer_ID LIKE @Coustomer_ID OR Coustomer_Name LIKE @Coustomer_Name OR Coustomer_Phone LIKE @Coustomer_Phone OR Coustomer_City LIKE @Coustomer_City";
-
+                string query = "SELECT * FROM `customer` WHERE Customer_ID LIKE @Customer_ID OR Customer_Name LIKE @Customer_Name OR Customer_Phone LIKE @Customer_Phone OR Customer_City LIKE @Customer_City";
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@Coustomer_ID", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@Coustomer_Name", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@Coustomer_Phone", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@Coustomer_City", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Customer_ID", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Customer_Name", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Customer_Phone", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Customer_City", "%" + searchTerm + "%");
 
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
                         {
@@ -134,7 +133,7 @@ namespace Gas_System
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM coustomer", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM customer", conn);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
 

@@ -148,7 +148,7 @@ namespace Gas_System
         private void form_pl_Paint(object sender, PaintEventArgs e)
         {
             //連接資料表
-            string query = "SELECT * FROM `new_order`";
+            string query = "SELECT * FROM `gas_order`";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -171,7 +171,7 @@ namespace Gas_System
             //設定可搜索資料欄位的範圍
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                string query = "SELECT * FROM `new_order` WHERE Order_ID LIKE @Order_ID OR Customer_Name LIKE @Customer_Name";
+                string query = "SELECT * FROM `gas_order` WHERE Order_ID LIKE @Order_ID OR Customer_Name LIKE @Customer_Name";
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -213,7 +213,7 @@ namespace Gas_System
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM new_order", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM gas_order", conn);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
 
