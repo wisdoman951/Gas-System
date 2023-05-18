@@ -148,8 +148,9 @@ namespace Gas_System
         private void form_pl_Paint(object sender, PaintEventArgs e)
         {
             //連接資料表
-            string query = "SELECT * FROM `gas_order`";
-
+            //string query = "SELECT * FROM `gas_order`";
+            string query = "SELECT o.ORDER_Id, c.CUSTOMER_PhoneNo, o.DELIVERY_Address, o.DELIVERY_Time, c.CUSTOMER_Name, od.Order_type, od.Order_weight, o.COMPANY_Id FROM `gas_order` o JOIN`customer` c ON o.CUSTOMER_Id = c.CUSTOMER_Id JOIN `gas_order_detail` od ON o.ORDER_Id = od.Order_ID;";
+            
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
@@ -261,14 +262,18 @@ namespace Gas_System
         {
             if (e.RowIndex >= 0)
             {
+                // string query = "SELECT * FROM `gas_order` WHERE Order_ID LIKE @Order_ID OR Customer_Name LIKE @Customer_Name";
                 DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
-
+                //string query = "select * from `gas_order` a, `gas_order_detail` b, `customer` c where @a.order_id = @b.order_id and @c.customer_id = @a.customer_id and @a.order_id = @order_Id;";
                 // Access the data in the selected row and autofill other fields in the form
                 string orderId = selectedRow.Cells["Order_ID"].Value.ToString();
-                string customerName = selectedRow.Cells["Customer_ID"].Value.ToString();
-                string customerPhone = selectedRow.Cells["Customer_Phone"].Value.ToString();
+                string customerName = selectedRow.Cells["Customer_Name"].Value.ToString();
+                string customerPhone = selectedRow.Cells["Customer_PhoneNo"].Value.ToString();
                 string deliveryTime = selectedRow.Cells["Delivery_Time"].Value.ToString();
                 string deliveryAddress = selectedRow.Cells["Delivery_Address"].Value.ToString();
+                string orderWeight = selectedRow.Cells["Order_weight"].Value.ToString();
+                string orderType = selectedRow.Cells["Order_type"].Value.ToString();
+                string companyId = selectedRow.Cells["Company_Id"].Value.ToString();
 
                 // Autofill the other fields(Textbox) in the form
                 OrderID.Text = orderId;
@@ -276,6 +281,9 @@ namespace Gas_System
                 CustomerPhone.Text = customerPhone;
                 DeliveryTime.Text = deliveryTime;
                 DeliveryAddress.Text = deliveryAddress;
+                GasType.Text = orderType;
+                GasWeight.Text = orderWeight;
+                GasStationSelection.Text = companyId;
 
             }
         }

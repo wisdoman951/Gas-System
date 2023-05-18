@@ -56,10 +56,11 @@ namespace Gas_System
             this.label2 = new System.Windows.Forms.Label();
             this.form_pl = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GasStationSelection = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.GasType = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.Gas_Quantity = new System.Windows.Forms.TextBox();
+            this.GasWeight = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.DeliveryAddress = new System.Windows.Forms.TextBox();
             this.DeliveryDistrict = new System.Windows.Forms.TextBox();
@@ -85,7 +86,6 @@ namespace Gas_System
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.GasStationSelection = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -459,7 +459,7 @@ namespace Gas_System
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.GasType);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.Gas_Quantity);
+            this.groupBox1.Controls.Add(this.GasWeight);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.DeliveryAddress);
             this.groupBox1.Controls.Add(this.DeliveryDistrict);
@@ -482,6 +482,14 @@ namespace Gas_System
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "詳細訂單資訊";
+            // 
+            // GasStationSelection
+            // 
+            this.GasStationSelection.FormattingEnabled = true;
+            this.GasStationSelection.Location = new System.Drawing.Point(658, 114);
+            this.GasStationSelection.Name = "GasStationSelection";
+            this.GasStationSelection.Size = new System.Drawing.Size(176, 35);
+            this.GasStationSelection.TabIndex = 78;
             // 
             // label4
             // 
@@ -513,15 +521,15 @@ namespace Gas_System
             this.label7.TabIndex = 75;
             this.label7.Text = "桶類型";
             // 
-            // Gas_Quantity
+            // GasWeight
             // 
-            this.Gas_Quantity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(234)))), ((int)(((byte)(242)))));
-            this.Gas_Quantity.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Gas_Quantity.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Gas_Quantity.Location = new System.Drawing.Point(656, 78);
-            this.Gas_Quantity.Name = "Gas_Quantity";
-            this.Gas_Quantity.Size = new System.Drawing.Size(97, 24);
-            this.Gas_Quantity.TabIndex = 74;
+            this.GasWeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(234)))), ((int)(((byte)(242)))));
+            this.GasWeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.GasWeight.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GasWeight.Location = new System.Drawing.Point(656, 78);
+            this.GasWeight.Name = "GasWeight";
+            this.GasWeight.Size = new System.Drawing.Size(97, 24);
+            this.GasWeight.TabIndex = 74;
             // 
             // label10
             // 
@@ -801,14 +809,6 @@ namespace Gas_System
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // GasStationSelection
-            // 
-            this.GasStationSelection.FormattingEnabled = true;
-            this.GasStationSelection.Location = new System.Drawing.Point(658, 114);
-            this.GasStationSelection.Name = "GasStationSelection";
-            this.GasStationSelection.Size = new System.Drawing.Size(176, 35);
-            this.GasStationSelection.TabIndex = 78;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 27F);
@@ -899,7 +899,7 @@ namespace Gas_System
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox GasType;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox Gas_Quantity;
+        private System.Windows.Forms.TextBox GasWeight;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox GasStationSelection;
     }
