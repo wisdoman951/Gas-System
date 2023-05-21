@@ -150,7 +150,7 @@ namespace Gas_System
             //連接資料表
             //string query = "SELECT * FROM `gas_order`";
             string query = "SELECT o.ORDER_Id, c.CUSTOMER_PhoneNo, o.DELIVERY_Address, o.DELIVERY_Time, c.CUSTOMER_Name, od.Order_type, od.Order_weight,o.Gas_Quantity, o.COMPANY_Id FROM `gas_order` o JOIN`customer` c ON o.CUSTOMER_Id = c.CUSTOMER_Id JOIN `gas_order_detail` od ON o.ORDER_Id = od.Order_ID;";
-            
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
@@ -159,44 +159,38 @@ namespace Gas_System
                     adapter.Fill(table);
 
                     dataGridView1.DataSource = table;
+                    dataGridView1.Columns["ORDER_Id"].HeaderText = "訂單編號";
+                    dataGridView1.Columns["CUSTOMER_PhoneNo"].HeaderText = "顧客電話";
+                    dataGridView1.Columns["DELIVERY_Address"].HeaderText = "送貨地址";
+                    dataGridView1.Columns["DELIVERY_Time"].HeaderText = "送貨時間";
+                    dataGridView1.Columns["CUSTOMER_Name"].HeaderText = "訂購人";
+                    dataGridView1.Columns["Order_type"].HeaderText = "瓦斯桶種類";
+                    dataGridView1.Columns["Order_weight"].HeaderText = "瓦斯規格";
+                    dataGridView1.Columns["Gas_Quantity"].HeaderText = "數量";
+                    dataGridView1.Columns["COMPANY_Id"].HeaderText = "選擇瓦斯行";
                 }
             }
         }
 
 
-        private void button15_Click(object sender, EventArgs e)
+        private void SearchButton_Click(object sender, EventArgs e)
         {
-            //搜索關鍵字
-            string searchTerm = txt.Text;
+            string searchTerm = txt.Text.Trim();
 
-            //設定可搜索資料欄位的範圍
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                string query = "SELECT * FROM `gas_order` WHERE Order_ID LIKE @Order_ID OR Customer_Name LIKE @Customer_Name";
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                DataTable dataTable = (DataTable)dataGridView1.DataSource;
+                if (dataTable != null)
                 {
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Order_ID", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@Customer_Name", "%" + searchTerm + "%");
-
-                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
-                        {
-                            DataTable table = new DataTable();
-                            adapter.Fill(table);
-
-                            //查詢結果
-                            if (table.Rows.Count == 0)
-                            {
-                                MessageBox.Show("未找到結果。請重試。", "搜索失敗", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else
-                            {
-                                dataGridView1.DataSource = table;
-                            }
-                        }
-                    }
+                    string filterExpression = $"CUSTOMER_Name LIKE '%{searchTerm}%' OR CONVERT(ORDER_Id, 'System.String') LIKE '%{searchTerm}%' OR Customer_PhoneNo LIKE '%{searchTerm}%'";
+                    dataTable.DefaultView.RowFilter = filterExpression;
                 }
+            }
+            else
+            {
+                // Clear the filter if the search term is empty
+                DataTable dataTable = (DataTable)dataGridView1.DataSource;
+                dataTable.DefaultView.RowFilter = string.Empty;
             }
         }
 
@@ -207,19 +201,29 @@ namespace Gas_System
         }
 
         
-        private void button14_Click(object sender, EventArgs e)
+        private void RefreshButton_Click(object sender, EventArgs e)
         {
             //刷新dataGridView顯示的資料表
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT o.ORDER_Id, c.CUSTOMER_PhoneNo, o.DELIVERY_Address, o.DELIVERY_Time, c.CUSTOMER_Name, od.Order_type, od.Order_weight,o.Gas_Quantity, o.COMPANY_Id FROM `gas_order` o JOIN`customer` c ON o.CUSTOMER_Id = c.CUSTOMER_Id JOIN `gas_order_detail` od ON o.ORDER_Id = od.Order_ID", conn);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
+            string query = "SELECT o.ORDER_Id, c.CUSTOMER_PhoneNo, o.DELIVERY_Address, o.DELIVERY_Time, c.CUSTOMER_Name, od.Order_type, od.Order_weight,o.Gas_Quantity, o.COMPANY_Id FROM `gas_order` o JOIN`customer` c ON o.CUSTOMER_Id = c.CUSTOMER_Id JOIN `gas_order_detail` od ON o.ORDER_Id = od.Order_ID;";
 
-                da.Fill(dt);
-                dataGridView1.DataSource = dt;
-                conn.Close();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
+                {
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+
+                    dataGridView1.DataSource = table;
+                    dataGridView1.Columns["ORDER_Id"].HeaderText = "訂單編號";
+                    dataGridView1.Columns["CUSTOMER_PhoneNo"].HeaderText = "顧客電話";
+                    dataGridView1.Columns["DELIVERY_Address"].HeaderText = "送貨地址";
+                    dataGridView1.Columns["DELIVERY_Time"].HeaderText = "送貨時間";
+                    dataGridView1.Columns["CUSTOMER_Name"].HeaderText = "訂購人";
+                    dataGridView1.Columns["Order_type"].HeaderText = "瓦斯桶種類";
+                    dataGridView1.Columns["Order_weight"].HeaderText = "瓦斯規格";
+                    dataGridView1.Columns["Gas_Quantity"].HeaderText = "數量";
+                    dataGridView1.Columns["COMPANY_Id"].HeaderText = "選擇瓦斯行";
+                }
             }
         }
 

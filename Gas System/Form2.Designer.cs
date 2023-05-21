@@ -56,6 +56,7 @@ namespace Gas_System
             this.label2 = new System.Windows.Forms.Label();
             this.form_pl = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GasStationSelection = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.GasType = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -83,7 +84,6 @@ namespace Gas_System
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.GasStationSelection = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -480,6 +480,16 @@ namespace Gas_System
             this.groupBox1.Text = "詳細訂單資訊";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // GasStationSelection
+            // 
+            this.GasStationSelection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(234)))), ((int)(((byte)(242)))));
+            this.GasStationSelection.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.GasStationSelection.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GasStationSelection.Location = new System.Drawing.Point(657, 129);
+            this.GasStationSelection.Name = "GasStationSelection";
+            this.GasStationSelection.Size = new System.Drawing.Size(97, 20);
+            this.GasStationSelection.TabIndex = 79;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -669,12 +679,13 @@ namespace Gas_System
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(25, 92);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(983, 397);
@@ -706,7 +717,7 @@ namespace Gas_System
             this.button14.TabIndex = 6;
             this.button14.Text = "更新";
             this.button14.UseVisualStyleBackColor = false;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
+            this.button14.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // button15
             // 
@@ -721,7 +732,7 @@ namespace Gas_System
             this.button15.TabIndex = 5;
             this.button15.Text = "搜尋";
             this.button15.UseVisualStyleBackColor = false;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
+            this.button15.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // label3
             // 
@@ -768,16 +779,6 @@ namespace Gas_System
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // GasStationSelection
-            // 
-            this.GasStationSelection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(234)))), ((int)(((byte)(242)))));
-            this.GasStationSelection.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.GasStationSelection.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GasStationSelection.Location = new System.Drawing.Point(657, 129);
-            this.GasStationSelection.Name = "GasStationSelection";
-            this.GasStationSelection.Size = new System.Drawing.Size(97, 20);
-            this.GasStationSelection.TabIndex = 79;
             // 
             // Form2
             // 

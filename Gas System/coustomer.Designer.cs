@@ -306,7 +306,7 @@ namespace Gas_System
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "coustomer";
-            this.Text = "coustomer";
+            this.Text = "customer";
             this.Load += new System.EventHandler(this.coustomer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
