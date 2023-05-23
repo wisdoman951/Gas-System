@@ -212,7 +212,7 @@ namespace Gas_System
                 {
                     DataTable table = new DataTable();
                     adapter.Fill(table);
-
+                    txt.Text = "";
                     dataGridView1.DataSource = table;
                     dataGridView1.Columns["ORDER_Id"].HeaderText = "訂單編號";
                     dataGridView1.Columns["CUSTOMER_PhoneNo"].HeaderText = "顧客電話";
