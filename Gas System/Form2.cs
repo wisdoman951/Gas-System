@@ -230,8 +230,8 @@ namespace Gas_System
         private void button17_Click(object sender, EventArgs e)
         {
             //開啟客戶資料的視窗
-            coustomer f1;
-            f1 = new coustomer();
+            customer_form f1;
+            f1 = new customer_form();
             f1.ShowDialog();
         }
 

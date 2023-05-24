@@ -42,8 +42,8 @@ namespace Gas_System
         {
             //開啟基本用戶資料頁面
             //新增一筆資料
-            coustomer f1;
-            f1 = new coustomer();
+            customer_form f1;
+            f1 = new customer_form();
             f1.ShowDialog();
         }
 
@@ -51,8 +51,8 @@ namespace Gas_System
         {
             //開啟基本用戶資料頁面
             //編輯修改某筆資料
-            coustomer f1;
-            f1 = new coustomer();
+            customer_form f1;
+            f1 = new customer_form();
             f1.ShowDialog();
         }
 
