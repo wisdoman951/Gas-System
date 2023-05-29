@@ -230,8 +230,8 @@ namespace Gas_System
         private void button17_Click(object sender, EventArgs e)
         {
             //開啟客戶資料的視窗
-            customer_form f1;
-            f1 = new customer_form();
+            coustomer f1;
+            f1 = new coustomer();
             f1.ShowDialog();
         }
 
@@ -293,7 +293,43 @@ namespace Gas_System
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
 
+                string query = @"SELECT *
+                                FROM gas_order_history
+                                WHERE CUSTOMER_Id = (
+                                    SELECT CUSTOMER_Id
+                                    FROM gas_order_history
+                                    WHERE ORDER_Id = @order_id
+                                )
+                                ORDER BY DELIVERY_Time DESC;
+                                ";
+
+                DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
+                string order_id = selectedRow.Cells["Order_Id"].Value.ToString();
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@order_id", order_id);
+
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                    {
+                        DataTable historyOrders = new DataTable();
+                        adapter.Fill(historyOrders);
+
+                        // Create an instance of the HistoryOrder form
+                        HistoryOrder historyOrderForm = new HistoryOrder();
+
+                        // Pass the historyOrders DataTable to the form
+                        historyOrderForm.SetData(historyOrders);
+
+                        // Display the form
+                        historyOrderForm.ShowDialog();
+
+                    }
+                }
+            }
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

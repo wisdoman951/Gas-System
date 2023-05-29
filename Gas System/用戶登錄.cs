@@ -40,20 +40,20 @@ namespace Gas_System
 
         private void add_Click(object sender, EventArgs e)
         {
-            //開啟基本用戶資料頁面
+            /*//開啟基本用戶資料頁面
             //新增一筆資料
             customer_form f1;
             f1 = new customer_form();
-            f1.ShowDialog();
+            f1.ShowDialog();*/
         }
 
         private void edit_Click(object sender, EventArgs e)
         {
-            //開啟基本用戶資料頁面
+           /* //開啟基本用戶資料頁面
             //編輯修改某筆資料
             customer_form f1;
             f1 = new customer_form();
-            f1.ShowDialog();
+            f1.ShowDialog();*/
         }
 
         private void delete_Click(object sender, EventArgs e)
