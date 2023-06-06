@@ -42,6 +42,7 @@ namespace Gas_System
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.ShowAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -181,9 +182,9 @@ namespace Gas_System
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(114)))));
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 22);
+            this.label1.Size = new System.Drawing.Size(90, 22);
             this.label1.TabIndex = 0;
-            this.label1.Text = "瓦斯通報功能";
+            this.label1.Text = "瓦斯桶登錄";
             // 
             // button1
             // 
@@ -215,12 +216,28 @@ namespace Gas_System
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // ShowAll
+            // 
+            this.ShowAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
+            this.ShowAll.FlatAppearance.BorderSize = 0;
+            this.ShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ShowAll.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ShowAll.ForeColor = System.Drawing.Color.White;
+            this.ShowAll.Location = new System.Drawing.Point(296, 100);
+            this.ShowAll.Name = "ShowAll";
+            this.ShowAll.Size = new System.Drawing.Size(83, 26);
+            this.ShowAll.TabIndex = 22;
+            this.ShowAll.Text = "顯示全部";
+            this.ShowAll.UseVisualStyleBackColor = false;
+            this.ShowAll.Click += new System.EventHandler(this.ShowAll_Click);
+            // 
             // 瓦斯桶登錄
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1034, 756);
+            this.Controls.Add(this.ShowAll);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
@@ -260,5 +277,6 @@ namespace Gas_System
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ShowAll;
     }
 }

@@ -16,7 +16,6 @@ namespace Gas_System
     {
         //連接資料庫
         private readonly string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
-
         public Form2()
         {
             InitializeComponent();
@@ -128,8 +127,15 @@ namespace Gas_System
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //開啟對應分頁
-            openChildForm(new 瓦斯桶登錄());
+            if (SharedData.SelectedCompanyId != "")
+            {
+                openChildForm(new 瓦斯桶登錄(SharedData.SelectedCompanyId));
+            }
+            else
+            {
+                openChildForm(new 瓦斯桶登錄(""));
+
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)

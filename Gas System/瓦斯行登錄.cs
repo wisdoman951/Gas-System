@@ -139,5 +139,15 @@ namespace Gas_System
                 conn.Close();
             }
         }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
+                SharedData.SelectedCompanyId = selectedRow.Cells["COMPANY_Id"].Value.ToString();
+                // Rest of your code...
+            }
+        }
     }
 }

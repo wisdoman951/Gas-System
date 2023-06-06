@@ -140,5 +140,46 @@ namespace Gas_System
                 conn.Close();
             }
         }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT *
+                                FROM sensor_history
+                                WHERE SENSOR_Id = (
+                                    SELECT SENSOR_Id
+                                    FROM iot
+                                    WHERE SENSOR_Id = @SENSOR_Id
+                                )
+                                ORDER BY SENSOR_Time DESC;
+                                ";
+
+                DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
+                string SENDOR_Id = selectedRow.Cells["SENSOR_Id"].Value.ToString();
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@SENSOR_Id", SENDOR_Id);
+
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                    {
+                        DataTable historyOrders = new DataTable();
+                        adapter.Fill(historyOrders);
+
+                        // Create an instance of the HistoryOrder form
+                        HistoryOrder historyOrderForm = new HistoryOrder();
+
+                        // Pass the historyOrders DataTable to the form
+                        historyOrderForm.SetData(historyOrders);
+
+                        // Display the form
+                        historyOrderForm.ShowDialog();
+
+                    }
+                }
+            }
+        }
     }
 }

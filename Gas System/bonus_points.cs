@@ -25,7 +25,7 @@ namespace Gas_System
         private void bonus_points_Load(object sender, EventArgs e)
         {
             //紅利點數(沒有資料...之後要跟德宏確認)
-            string query = "SELECT * FROM `bonus_points`";
+            string query = "SELECT * FROM `customer_accumulation`";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))

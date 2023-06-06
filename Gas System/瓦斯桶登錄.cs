@@ -16,10 +16,12 @@ namespace Gas_System
     {
         //連接資料庫
         private readonly string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
+        private readonly string companyId;
 
-        public 瓦斯桶登錄()
+        public 瓦斯桶登錄(string companyId)
         {
             InitializeComponent();
+            this.companyId = companyId;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -30,16 +32,32 @@ namespace Gas_System
         private void 瓦斯桶登錄_Load(object sender, EventArgs e)
         {
             //設定dataGridView與資料表連接
-            string query = "SELECT * FROM `gas`";
+            string query = $"SELECT * FROM `gas` WHERE GAS_Company_Id = '{companyId}'";
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
                 {
                     DataTable table = new DataTable();
                     adapter.Fill(table);
-
                     dataGridView1.DataSource = table;
+                    // ... Additional code to customize the DataGridView
                 }
+            }
+        }
+        private void ShowAll_Click(object sender, EventArgs e)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM gas", conn);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                dataGridView1.DataSource = dt;
+                conn.Close();
             }
         }
 
@@ -98,17 +116,17 @@ namespace Gas_System
             //設定可搜索資料欄位的範圍
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                string query = "SELECT * FROM `gas` WHERE Gas ID LIKE @Gas ID OR Gas Company ID LIKE @Gas Company ID OR Gas Type LIKE @Gas Type OR Gas Volume LIKE @Gas Volume";
+                string query = "SELECT * FROM `gas` WHERE Gas_ID LIKE @Gas_ID OR Gas_Company_ID LIKE @Gas_Company_ID OR Gas_Type LIKE @Gas_Type OR Gas_Volume LIKE @Gas_Volume";
                 
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@Gas ID", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@Gas Company ID", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@Gas Type", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@Gas Volume", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Gas_ID", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Gas_Company_ID", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Gas_Type", "%" + searchTerm + "%");
+                        command.Parameters.AddWithValue("@Gas_Volume", "%" + searchTerm + "%");
 
 
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
@@ -118,7 +136,7 @@ namespace Gas_System
 
                             if (table.Rows.Count == 0)
                             {
-                                MessageBox.Show("未找到结果。请重试。", "搜索失败", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("未找到結果。請重試。", "搜尋失敗", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
                             {
@@ -156,5 +174,7 @@ namespace Gas_System
         {
 
         }
+
+        
     }
 }
