@@ -34,15 +34,14 @@ namespace Gas_System
             this.edit = new System.Windows.Forms.Button();
             this.add = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.refreshButton = new System.Windows.Forms.Button();
-            this.search = new System.Windows.Forms.Button();
+            this.RefreshButton = new System.Windows.Forms.Button();
+            this.SearchButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txt = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.ShowAll = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -55,6 +54,7 @@ namespace Gas_System
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(29, 134);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(972, 579);
             this.dataGridView1.TabIndex = 19;
@@ -106,8 +106,8 @@ namespace Gas_System
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.refreshButton);
-            this.panel5.Controls.Add(this.search);
+            this.panel5.Controls.Add(this.RefreshButton);
+            this.panel5.Controls.Add(this.SearchButton);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.txt);
             this.panel5.Location = new System.Drawing.Point(12, 46);
@@ -115,35 +115,35 @@ namespace Gas_System
             this.panel5.Size = new System.Drawing.Size(751, 44);
             this.panel5.TabIndex = 16;
             // 
-            // refreshButton
+            // RefreshButton
             // 
-            this.refreshButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
-            this.refreshButton.FlatAppearance.BorderSize = 0;
-            this.refreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.refreshButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.refreshButton.ForeColor = System.Drawing.Color.White;
-            this.refreshButton.Location = new System.Drawing.Point(648, 10);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(83, 26);
-            this.refreshButton.TabIndex = 6;
-            this.refreshButton.Text = "刷新";
-            this.refreshButton.UseVisualStyleBackColor = false;
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            this.RefreshButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
+            this.RefreshButton.FlatAppearance.BorderSize = 0;
+            this.RefreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RefreshButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RefreshButton.ForeColor = System.Drawing.Color.White;
+            this.RefreshButton.Location = new System.Drawing.Point(648, 10);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(83, 26);
+            this.RefreshButton.TabIndex = 6;
+            this.RefreshButton.Text = "刷新";
+            this.RefreshButton.UseVisualStyleBackColor = false;
+            this.RefreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
-            // search
+            // SearchButton
             // 
-            this.search.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
-            this.search.FlatAppearance.BorderSize = 0;
-            this.search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.search.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.search.ForeColor = System.Drawing.Color.White;
-            this.search.Location = new System.Drawing.Point(550, 10);
-            this.search.Name = "search";
-            this.search.Size = new System.Drawing.Size(83, 26);
-            this.search.TabIndex = 5;
-            this.search.Text = "搜尋";
-            this.search.UseVisualStyleBackColor = false;
-            this.search.Click += new System.EventHandler(this.search_Click);
+            this.SearchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
+            this.SearchButton.FlatAppearance.BorderSize = 0;
+            this.SearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SearchButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchButton.ForeColor = System.Drawing.Color.White;
+            this.SearchButton.Location = new System.Drawing.Point(550, 10);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(83, 26);
+            this.SearchButton.TabIndex = 5;
+            this.SearchButton.Text = "搜尋";
+            this.SearchButton.UseVisualStyleBackColor = false;
+            this.SearchButton.Click += new System.EventHandler(this.search_Click);
             // 
             // label3
             // 
@@ -152,7 +152,7 @@ namespace Gas_System
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label3.Location = new System.Drawing.Point(13, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 22);
+            this.label3.Size = new System.Drawing.Size(92, 27);
             this.label3.TabIndex = 4;
             this.label3.Text = "關鍵字：";
             // 
@@ -163,7 +163,7 @@ namespace Gas_System
             this.txt.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt.Location = new System.Drawing.Point(93, 13);
             this.txt.Name = "txt";
-            this.txt.Size = new System.Drawing.Size(440, 21);
+            this.txt.Size = new System.Drawing.Size(440, 26);
             this.txt.TabIndex = 3;
             // 
             // panel4
@@ -182,39 +182,9 @@ namespace Gas_System
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(114)))));
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 22);
+            this.label1.Size = new System.Drawing.Size(112, 27);
             this.label1.TabIndex = 0;
             this.label1.Text = "瓦斯桶登錄";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(820, 719);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(83, 26);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "全體通報";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(918, 719);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(83, 26);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "通報所選";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ShowAll
             // 
@@ -231,15 +201,25 @@ namespace Gas_System
             this.ShowAll.UseVisualStyleBackColor = false;
             this.ShowAll.Click += new System.EventHandler(this.ShowAll_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(385, 103);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(639, 23);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "若無顯示資料，請返回「瓦斯行登錄」點擊瓦斯行後返回，或點選「顯示全部」按鈕";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
             // 瓦斯桶登錄
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1034, 756);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.ShowAll);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.delete);
             this.Controls.Add(this.edit);
@@ -259,6 +239,7 @@ namespace Gas_System
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -269,14 +250,13 @@ namespace Gas_System
         private System.Windows.Forms.Button edit;
         private System.Windows.Forms.Button add;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button refreshButton;
-        private System.Windows.Forms.Button search;
+        private System.Windows.Forms.Button RefreshButton;
+        private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txt;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button ShowAll;
+        private System.Windows.Forms.Label label2;
     }
 }

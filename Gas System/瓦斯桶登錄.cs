@@ -88,7 +88,7 @@ namespace Gas_System
                 if (result == DialogResult.Yes)
                 {
                     string id = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                    string query = "DELETE FROM `coustomer` WHERE `ID` = @ID";
+                    string query = "DELETE FROM `gas` WHERE `GAS_Id` = @ID";
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -175,6 +175,9 @@ namespace Gas_System
 
         }
 
-        
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

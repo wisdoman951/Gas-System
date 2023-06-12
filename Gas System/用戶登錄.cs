@@ -40,20 +40,20 @@ namespace Gas_System
 
         private void add_Click(object sender, EventArgs e)
         {
-            /*//開啟基本用戶資料頁面
+            //開啟基本用戶資料頁面
             //新增一筆資料
             customer_form f1;
             f1 = new customer_form();
-            f1.ShowDialog();*/
+            f1.ShowDialog();
         }
 
         private void edit_Click(object sender, EventArgs e)
         {
-           /* //開啟基本用戶資料頁面
+            //開啟基本用戶資料頁面
             //編輯修改某筆資料
             customer_form f1;
             f1 = new customer_form();
-            f1.ShowDialog();*/
+            f1.ShowDialog();
         }
 
         private void delete_Click(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace Gas_System
             //設定可搜索資料欄位的範圍
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                string query = "SELECT * FROM `customer` WHERE Customer_ID LIKE @Customer_ID OR Customer_Name LIKE @Customer_Name OR Customer_Phone LIKE @Customer_Phone OR Customer_City LIKE @Customer_City";
+                string query = "SELECT * FROM `customer` WHERE Customer_ID LIKE @Customer_ID OR Customer_Name LIKE @Customer_Name OR Customer_PhoneNo LIKE @Customer_Phone OR Customer_City LIKE @Customer_City";
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     using (MySqlCommand command = new MySqlCommand(query, connection))

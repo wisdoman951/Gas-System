@@ -12,11 +12,11 @@ using System.Configuration;
 
 namespace Gas_System
 {
-    public partial class coustomer : Form
+    public partial class customer_form : Form
     {
         
 
-        public coustomer()
+        public customer_form()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace Gas_System
             
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void ConfirmAddButton_Click(object sender, EventArgs e)
         {
             //連接資料庫
             string connStr = ConfigurationManager.AppSettings["ConnectionString"]; ;
@@ -35,22 +35,21 @@ namespace Gas_System
                 conn.Open();
 
                 //新增一筆資料
-                string insertQuery = "INSERT INTO coustomer (Coustomer_ID,Coustomer_Name,Coustomer_Sex,Coustomer_Phone,Coustomer_HouseTel,Coustomer_Email,Coustomer_City,Coustomer_District,Coustomer_Address,Coustomer_FamilyMember_ID,Company_ID,Registered_at) VALUES (@Coustomer_ID,@Coustomer_Name,@Coustomer_Sex,@Coustomer_Phone,@Coustomer_HouseTel,@Coustomer_Email,@Coustomer_City,@Coustomer_District,@Coustomer_Address,@Coustomer_FamilyMember_ID,Company_ID,NOW())";
+                string insertQuery = "INSERT INTO customer (Customer_ID, Customer_Name, Customer_Sex, Customer_Phone, Customer_HouseTel, Customer_Email, Customer_City, Customer_District, Customer_Address, Customer_FamilyMember_ID, Company_ID,Registered_at)" + 
+                    "VALUES (@Customer_ID,@Customer_Name,@Customer_Sex,@Customer_Phone,@Customer_HouseTel,@Customer_Email,@Customer_City,@Customer_District,@Customer_Address,@Customer_FamilyMember_ID,Company_ID,NOW())";
 
                 MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
-                cmd.Parameters.AddWithValue("@Coustomer_ID", number.Text);
-                cmd.Parameters.AddWithValue("@Coustomer_Name", Uname.Text);
-                cmd.Parameters.AddWithValue("@Coustomer_Sex", sex.Text);
-                cmd.Parameters.AddWithValue("@Coustomer_Phone", phone.Text);
-                cmd.Parameters.AddWithValue("@Coustomer_HouseTel", tel.Text);
-                cmd.Parameters.AddWithValue("@Coustomer_Email", email.Text);
-                cmd.Parameters.AddWithValue("@Coustomer_City", city.Text);
-                cmd.Parameters.AddWithValue("@Coustomer_District", district.Text);
-                cmd.Parameters.AddWithValue("@Coustomer_Address", address.Text);
-                cmd.Parameters.AddWithValue("@Coustomer_FamilyMember_ID", family.Text);
+                cmd.Parameters.AddWithValue("@Customer_ID", number.Text);
+                cmd.Parameters.AddWithValue("@Customer_Name", Uname.Text);
+                cmd.Parameters.AddWithValue("@Customer_Sex", sex.Text);
+                cmd.Parameters.AddWithValue("@Customer_Phone", phone.Text);
+                cmd.Parameters.AddWithValue("@Customer_HouseTel", tel.Text);
+                cmd.Parameters.AddWithValue("@Customer_Email", email.Text);
+                cmd.Parameters.AddWithValue("@Customer_City", city.Text);
+                cmd.Parameters.AddWithValue("@Customer_District", district.Text);
+                cmd.Parameters.AddWithValue("@Customer_Address", address.Text);
+                cmd.Parameters.AddWithValue("@Customer_FamilyMember_ID", family.Text);
                 cmd.Parameters.AddWithValue("@Company_ID", company.Text);
-
-
 
                 if (cmd.ExecuteNonQuery() == 1)
                 {

@@ -137,7 +137,6 @@ namespace Gas_System
 
             }
         }
-
         private void button8_Click(object sender, EventArgs e)
         {
             //開啟對應分頁
@@ -236,8 +235,8 @@ namespace Gas_System
         private void button17_Click(object sender, EventArgs e)
         {
             //開啟客戶資料的視窗
-            coustomer f1;
-            f1 = new coustomer();
+            customer_form f1;
+            f1 = new customer_form();
             f1.ShowDialog();
         }
 
@@ -265,15 +264,14 @@ namespace Gas_System
         private void button13_Click(object sender, EventArgs e)
         {
             //瓦斯行明細查詢(具體要查什麼沒有明確...之後要跟德宏確認)
+            openChildForm(new 瓦斯行明細查詢());
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                // string query = "SELECT * FROM `gas_order` WHERE Order_ID LIKE @Order_ID OR Customer_Name LIKE @Customer_Name";
                 DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
-                //string query = "select * from `gas_order` a, `gas_order_detail` b, `customer` c where @a.order_id = @b.order_id and @c.customer_id = @a.customer_id and @a.order_id = @order_Id;";
                 // Access the data in the selected row and autofill other fields in the form
                 string orderId = selectedRow.Cells["Order_ID"].Value.ToString();
                 string customerName = selectedRow.Cells["Customer_Name"].Value.ToString();
