@@ -45,6 +45,7 @@ namespace Gas_System
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.TimePicker = new System.Windows.Forms.DateTimePicker();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -90,6 +91,7 @@ namespace Gas_System
             this.panel5.Controls.Add(this.FromSource);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.TimePicker);
             this.panel5.Location = new System.Drawing.Point(12, 39);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(992, 44);
@@ -97,7 +99,7 @@ namespace Gas_System
             // 
             // Filter
             // 
-            this.Filter.Location = new System.Drawing.Point(719, 10);
+            this.Filter.Location = new System.Drawing.Point(713, 10);
             this.Filter.Name = "Filter";
             this.Filter.Size = new System.Drawing.Size(164, 25);
             this.Filter.TabIndex = 29;
@@ -120,6 +122,7 @@ namespace Gas_System
             this.FromFilter.Name = "FromFilter";
             this.FromFilter.Size = new System.Drawing.Size(121, 23);
             this.FromFilter.TabIndex = 27;
+            this.FromFilter.SelectedIndexChanged += new System.EventHandler(this.FromFilter_SelectedIndexChanged);
             // 
             // day
             // 
@@ -223,6 +226,13 @@ namespace Gas_System
             this.button1.Text = "匯出";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // TimePicker
+            // 
+            this.TimePicker.Location = new System.Drawing.Point(713, 10);
+            this.TimePicker.Name = "TimePicker";
+            this.TimePicker.Size = new System.Drawing.Size(170, 25);
+            this.TimePicker.TabIndex = 30;
+            // 
             // 瓦斯行明細查詢
             // 
             this.ClientSize = new System.Drawing.Size(1016, 709);
@@ -262,5 +272,6 @@ namespace Gas_System
         private System.Windows.Forms.ComboBox FromFilter;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DateTimePicker TimePicker;
     }
 }

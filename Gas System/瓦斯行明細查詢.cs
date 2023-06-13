@@ -31,7 +31,7 @@ namespace Gas_System
 
             if (selectedFromSource == "未完成訂單")
             {
-                FromFilter.Items.AddRange(new string[] { "ORDER_Id", "CUSTOMER_Id", "COMPANY_Id", "DELIVERY_Time", "DELIVERY_Condition", "Exchange", "DELIVERY_Address", "DELIVERY_Phone", "Gas_Quantity", "Order_Time", "Expect_time", "Delivery_Method" });
+                FromFilter.Items.AddRange(new string[] { "ORDER_Id", "CUSTOMER_Id", "COMPANY_Id", "DELIVERY_Condition", "Exchange", "DELIVERY_Phone", "Gas_Quantity", "Order_Time", "Delivery_Method" });
             }
             else if (selectedFromSource == "已完成訂單")
             {
@@ -96,6 +96,21 @@ namespace Gas_System
                 query = $"SELECT * FROM worker WHERE {selectedFromFilter} = '{filterValue}'";
             }
 
+            // Check if the selected FromFilter is a time-related column
+            if (selectedFromFilter == "DELIVERY_Time" || selectedFromFilter == "Expect_time" || selectedFromFilter == "Delivery_Method" || selectedFromFilter == "Completion_Date" || selectedFromFilter == "CUSTOMER_Registration_Time" || selectedFromFilter == "GAS_Examine_Day" || selectedFromFilter == "GAS_Produce_Day" || selectedFromFilter == "Gas_Registration_Time")
+            {
+                DateTime selectedTime;
+                if (DateTime.TryParse(filterValue, out selectedTime))
+                {
+                    filterValue = selectedTime.ToString("yyyy-MM-dd HH:mm:ss");
+                }
+                else
+                {
+                    MessageBox.Show("Invalid DateTime format.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
@@ -112,5 +127,24 @@ namespace Gas_System
             }
         }
 
+
+
+        private void FromFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedFromFilter = FromFilter.SelectedItem.ToString();
+
+            if (selectedFromFilter == "DELIVERY_Time" || selectedFromFilter == "DELIVERY_Time" || selectedFromFilter == "Expect_time"  || selectedFromFilter == "Completion_Date" || selectedFromFilter == "CUSTOMER_Registration_Time" || selectedFromFilter == "GAS_Examine_Day" || selectedFromFilter == "GAS_Produce_Day" || selectedFromFilter == "Gas_Registration_Time")
+            {
+                // Selected item is a time-related column
+                Filter.Visible = false;
+                TimePicker.Visible = true;
+            }
+            else
+            {
+                // Selected item is not a time-related column
+                Filter.Visible = true;
+                TimePicker.Visible = false;
+            }
+        }
     }
 }
