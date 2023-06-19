@@ -91,6 +91,12 @@
     <Compile Include="bonus_points.Designer.cs">
       <DependentUpon>bonus_points.cs</DependentUpon>
     </Compile>
+    <Compile Include="gas_edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gas_edit.Designer.cs">
+      <DependentUpon>gas_edit.cs</DependentUpon>
+    </Compile>
     <Compile Include="SharedData.cs" />
     <Compile Include="company.cs">
       <SubType>Form</SubType>
@@ -157,6 +163,12 @@
     <Compile Include="瓦斯桶登錄.Designer.cs">
       <DependentUpon>瓦斯桶登錄.cs</DependentUpon>
     </Compile>
+    <Compile Include="瓦斯行明細查詢.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="瓦斯行明細查詢.designer.cs">
+      <DependentUpon>瓦斯行明細查詢.cs</DependentUpon>
+    </Compile>
     <Compile Include="瓦斯通報.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +214,9 @@
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="gas_edit.resx">
+      <DependentUpon>gas_edit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="gas.resx">
       <DependentUpon>gas.cs</DependentUpon>
     </EmbeddedResource>
@@ -226,6 +241,9 @@
     </Compile>
     <EmbeddedResource Include="瓦斯桶登錄.resx">
       <DependentUpon>瓦斯桶登錄.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="瓦斯行明細查詢.resx">
+      <DependentUpon>瓦斯行明細查詢.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="瓦斯通報.resx">
       <DependentUpon>瓦斯通報.cs</DependentUpon>

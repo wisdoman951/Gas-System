@@ -40,22 +40,51 @@ namespace Gas_System
 
         private void add_Click(object sender, EventArgs e)
         {
-            /*//開啟基本用戶資料頁面
+            //開啟基本用戶資料頁面
             //新增一筆資料
-            customer_form f1;
-            f1 = new customer_form();
-            f1.ShowDialog();*/
+            customer_form f1 = new customer_form(null);
+            if (f1.ShowDialog() == DialogResult.OK)
+            {
+                // Perform data refresh or any other required actions after the form is closed
+                RefreshData();
+            }
         }
 
         private void edit_Click(object sender, EventArgs e)
         {
-           /* //開啟基本用戶資料頁面
+            //開啟基本用戶資料頁面
             //編輯修改某筆資料
-            customer_form f1;
-            f1 = new customer_form();
-            f1.ShowDialog();*/
-        }
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                string id = dataGridView1.SelectedRows[0].Cells["CUSTOMER_Id"].Value.ToString();
 
+                // Pass the selected ID to the customer_form for editing
+                customer_form f1 = new customer_form(id);
+                if (f1.ShowDialog() == DialogResult.OK)
+                {
+                    // Perform data refresh or any other required actions after the form is closed
+                    RefreshData();
+                }
+            }
+            else
+            {
+                MessageBox.Show("請選擇要編輯的資料行", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private void RefreshData()
+        {
+            string query = "SELECT * FROM `customer`";
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
+                {
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+
+                    dataGridView1.DataSource = table;
+                }
+            }
+        }
         private void delete_Click(object sender, EventArgs e)
         {
             //選取表單一行資料後按刪除鍵，刪除一筆資料
@@ -97,7 +126,7 @@ namespace Gas_System
             //設定可搜索資料欄位的範圍
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                string query = "SELECT * FROM `customer` WHERE Customer_ID LIKE @Customer_ID OR Customer_Name LIKE @Customer_Name OR Customer_Phone LIKE @Customer_Phone OR Customer_City LIKE @Customer_City";
+                string query = "SELECT * FROM `customer` WHERE Customer_ID LIKE @Customer_ID OR Customer_Name LIKE @Customer_Name OR Customer_PhoneNo LIKE @Customer_Phone";
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -105,7 +134,6 @@ namespace Gas_System
                         command.Parameters.AddWithValue("@Customer_ID", "%" + searchTerm + "%");
                         command.Parameters.AddWithValue("@Customer_Name", "%" + searchTerm + "%");
                         command.Parameters.AddWithValue("@Customer_Phone", "%" + searchTerm + "%");
-                        command.Parameters.AddWithValue("@Customer_City", "%" + searchTerm + "%");
 
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
                         {

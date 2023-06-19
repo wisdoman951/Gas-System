@@ -72,11 +72,39 @@ namespace Gas_System
 
         private void edit_Click(object sender, EventArgs e)
         {
-            //開啟瓦斯桶資料頁面
-            //編輯修改某筆資料
-            gas f1;
-            f1 = new gas();
-            f1.ShowDialog();
+            // Get the selected row
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                // Get the Gas_ID of the selected row
+                string gasId = dataGridView1.SelectedRows[0].Cells["Gas_ID"].Value.ToString();
+
+                // Pass the gasId to the edit form
+                gas_edit editForm = new gas_edit(gasId);
+                editForm.ShowDialog();
+
+                // Refresh the DataGridView after editing
+                RefreshDataGridView();
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to edit.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void RefreshDataGridView()
+        {
+            // Refresh the DataGridView
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM gas WHERE GAS_Company_Id = @CompanyId", conn);
+                cmd.Parameters.AddWithValue("@CompanyId", companyId);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dataGridView1.DataSource = dt;
+                conn.Close();
+            }
         }
 
         private void delete_Click(object sender, EventArgs e)
@@ -88,7 +116,7 @@ namespace Gas_System
                 if (result == DialogResult.Yes)
                 {
                     string id = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                    string query = "DELETE FROM `coustomer` WHERE `ID` = @ID";
+                    string query = "DELETE FROM `gas` WHERE `gas_ID` = @ID";
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -117,7 +145,7 @@ namespace Gas_System
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 string query = "SELECT * FROM `gas` WHERE Gas_ID LIKE @Gas_ID OR Gas_Company_ID LIKE @Gas_Company_ID OR Gas_Type LIKE @Gas_Type OR Gas_Volume LIKE @Gas_Volume";
-                
+
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -175,6 +203,6 @@ namespace Gas_System
 
         }
 
-        
+
     }
 }

@@ -90,7 +90,8 @@ namespace Gas_System
         private void OrderManagementPage_Click(object sender, EventArgs e)
         {
             //關閉分頁
-            activeForm.Close();
+            if (activeForm != null)
+                activeForm.Close();
             hideSubMenu();
         }
 
@@ -233,15 +234,14 @@ namespace Gas_System
             }
         }
 
-        private void button17_Click(object sender, EventArgs e)
+        /*private void button17_Click(object sender, EventArgs e)
         {
             //開啟客戶資料的視窗
-            coustomer f1;
-            f1 = new coustomer();
+            customer_form f1;
+            f1 = new customer_form();
             f1.ShowDialog();
-        }
+        }*/
 
-        //以下頁面"未完"
         private void button12_Click(object sender, EventArgs e)
         {
             //紅利點數(具體紅利方案沒有明確...之後要跟德宏確認)
@@ -264,7 +264,7 @@ namespace Gas_System
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //瓦斯行明細查詢(具體要查什麼沒有明確...之後要跟德宏確認)
+            openChildForm(new 瓦斯行明細查詢());
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

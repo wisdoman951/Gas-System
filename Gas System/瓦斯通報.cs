@@ -38,7 +38,7 @@ namespace Gas_System
             }
         }
 
-        private void add_Click(object sender, EventArgs e)
+        /*private void add_Click(object sender, EventArgs e)
         {
             //開啟瓦斯行資料頁面
             //新增一筆資料
@@ -54,7 +54,7 @@ namespace Gas_System
             company f1;
             f1 = new company();
             f1.ShowDialog();
-        }
+        }*/
 
         private void delete_Click(object sender, EventArgs e)
         {
