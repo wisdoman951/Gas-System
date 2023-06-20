@@ -71,7 +71,7 @@ namespace Gas_System
                 MessageBox.Show("請選擇要編輯的資料行", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        private void RefreshData()
+        private void RefreshData()  
         {
             string query = "SELECT * FROM `customer`";
             using (MySqlConnection connection = new MySqlConnection(connectionString))

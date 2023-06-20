@@ -61,6 +61,8 @@ namespace Gas_System
                    GasWeightEmpty.Text != originalRow["Gas_Weight_Empty"].ToString() ||
                    GasType.Text != originalRow["Gas_Type"].ToString() ||
                    GasVolume.Text != originalRow["Gas_Volume"].ToString() ||
+                   GasPrice.Text != originalRow["Gas_Price"].ToString() ||
+                   GasSupplier.Text != originalRow["Gas_Supplier"].ToString() ||
                    GasExamineDay.Text != originalRow["Gas_Examine_Day"].ToString() ||
                    GasProduceDay.Text != originalRow["Gas_Produce_Day"].ToString();
         }
@@ -81,7 +83,8 @@ namespace Gas_System
                                          "Gas_Weight_Empty = @Gas_Weight_Empty, " +
                                          "Gas_Type = @Gas_Type, " +
                                          "Gas_Volume = @Gas_Volume, " +
-                                         "Gas_Supplier = @Gas_Supplier, " +
+                                         "Gas_Supplier = @Gas_Supplier, " + 
+                                         "Gas_Price = @Gas_Price, " +
                                          "Gas_Examine_Day = STR_TO_DATE(@Gas_Examine_Day, '%Y年%m月%d日'), " +
                                          "Gas_Produce_Day = STR_TO_DATE(@Gas_Produce_Day, '%Y年%m月%d日') " +
                                          "WHERE Gas_ID = @Gas_ID";
@@ -93,6 +96,7 @@ namespace Gas_System
                     cmd.Parameters.AddWithValue("@Gas_Type", GasType.Text);
                     cmd.Parameters.AddWithValue("@Gas_Volume", GasVolume.Text);
                     cmd.Parameters.AddWithValue("@Gas_Supplier", GasSupplier.Text);
+                    cmd.Parameters.AddWithValue("@Gas_Price", GasPrice.Text);
                     cmd.Parameters.AddWithValue("@Gas_Examine_Day", GasExamineDay.Text);
                     cmd.Parameters.AddWithValue("@Gas_Produce_Day", GasProduceDay.Text);
                     cmd.Parameters.AddWithValue("@Gas_ID", gasId);
@@ -113,6 +117,7 @@ namespace Gas_System
                 MessageBox.Show("No changes detected.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
 
         // ...
 

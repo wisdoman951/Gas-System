@@ -3,22 +3,24 @@ using System.Configuration;
 using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 
 namespace Gas_System
 {
     public partial class customer_form : Form
     {
         private readonly string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
+        private string orderId;
         private string customerId;
         private bool isEditMode;
 
 
-        public customer_form(string id)
+        public customer_form(string id, string customerId)
         {
             InitializeComponent();
-            customerId = id;
+            orderId = id;
+            this.customerId = customerId;
             isEditMode = !string.IsNullOrEmpty(id);
-
         }
         private void customer_form_Load(object sender, EventArgs e)
         {
@@ -190,6 +192,6 @@ namespace Gas_System
             }
         }
 
-        
+
     }
 }

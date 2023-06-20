@@ -1,14 +1,10 @@
-﻿using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System.Data;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.IO;
 using System.Configuration;
 using System;
-using System.Drawing.Text;
 
 namespace Gas_System
 {
@@ -113,9 +109,9 @@ namespace Gas_System
 
             if (isQueryMode = true && selectedFromFilter != null && filterValue != null)
             {
-                query = query + $" WHERE {selectedFromFilter} = '{filterValue}'";
+                query = query + $" AND {selectedFromFilter} = '{filterValue}'";
             }
-            // Check if the selected FromFilter is a time-related column
+            // 如果選的是時間格式的資料，自動切換成dateTimePicker
             if (selectedFromFilter == "DELIVERY_Time" || selectedFromFilter == "Expect_time" || selectedFromFilter == "Delivery_Method" || selectedFromFilter == "Completion_Date" || selectedFromFilter == "CUSTOMER_Registration_Time" || selectedFromFilter == "GAS_Examine_Day" || selectedFromFilter == "GAS_Produce_Day" || selectedFromFilter == "Gas_Registration_Time")
             {
                 DateTime selectedTime;
@@ -166,5 +162,56 @@ namespace Gas_System
                 TimePicker.Visible = false;
             }
         }
+
+        private void PrintButton_Click(object sender, EventArgs e)
+        {
+            // Create a SaveFileDialog to select the file path and name
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
+                saveFileDialog.Title = "Save CSV file";
+                saveFileDialog.ShowDialog();
+
+                // If the user clicked the "Save" button
+                if (saveFileDialog.FileName != "")
+                {
+                    try
+                    {
+                        // Create the CSV file and write the column headers
+                        StringBuilder csvContent = new StringBuilder();
+                        for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                        {
+                            csvContent.Append(dataGridView1.Columns[i].HeaderText);
+                            if (i < dataGridView1.Columns.Count - 1)
+                                csvContent.Append(",");
+                        }
+                        csvContent.AppendLine();
+
+                        // Write the data rows to the CSV file
+                        foreach (DataGridViewRow row in dataGridView1.Rows)
+                        {
+                            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                            {
+                                if (row.Cells[i].Value != null)
+                                    csvContent.Append(row.Cells[i].Value.ToString());
+                                if (i < dataGridView1.Columns.Count - 1)
+                                    csvContent.Append(",");
+                            }
+                            csvContent.AppendLine();
+                        }
+
+                        // Save the CSV file
+                        File.WriteAllText(saveFileDialog.FileName, csvContent.ToString());
+
+                        MessageBox.Show("CSV file saved successfully.", "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error saving CSV file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
     }
 }
