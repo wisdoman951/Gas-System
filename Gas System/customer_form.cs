@@ -3,23 +3,20 @@ using System.Configuration;
 using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
 
 namespace Gas_System
 {
     public partial class customer_form : Form
     {
         private readonly string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
-        private string orderId;
         private string customerId;
         private bool isEditMode;
 
 
-        public customer_form(string id, string customerId)
+        public customer_form(string id)
         {
             InitializeComponent();
-            orderId = id;
-            this.customerId = customerId;
+            customerId = id;
             isEditMode = !string.IsNullOrEmpty(id);
         }
         private void customer_form_Load(object sender, EventArgs e)
@@ -92,8 +89,7 @@ namespace Gas_System
             if (string.IsNullOrEmpty(CustomerName.Text) || string.IsNullOrEmpty(CustomerSex.Text) ||
                 string.IsNullOrEmpty(CustomerPhoneNo.Text) || string.IsNullOrEmpty(CustomerPostalCode.Text) ||
                 string.IsNullOrEmpty(CustomerAddress.Text) || string.IsNullOrEmpty(CustomerHouseTelNo.Text) ||
-                string.IsNullOrEmpty(CustomerPassword.Text) || string.IsNullOrEmpty(CustomerEmail.Text) ||
-                string.IsNullOrEmpty(CustomerFamilyMember.Text) || string.IsNullOrEmpty(CustomerCompanyID.Text))
+                string.IsNullOrEmpty(CustomerPassword.Text) || string.IsNullOrEmpty(CustomerEmail.Text))
             {
                 MessageBox.Show("All fields are required. Please fill in all the fields.", "Validation Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);

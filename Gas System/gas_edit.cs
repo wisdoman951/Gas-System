@@ -31,6 +31,8 @@ namespace Gas_System
             GasWeightEmpty.Text = originalRow["Gas_Weight_Empty"].ToString();
             GasType.Text = originalRow["Gas_Type"].ToString();
             GasVolume.Text = originalRow["Gas_Volume"].ToString();
+            GasSupplier.Text = originalRow["Gas_Supplier"].ToString();
+            GasPrice.Text = originalRow["Gas_Price"].ToString();
             GasExamineDay.Text = originalRow["Gas_Examine_Day"].ToString();
             GasProduceDay.Text = originalRow["Gas_Produce_Day"].ToString();
         }

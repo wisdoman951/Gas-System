@@ -44,7 +44,7 @@ namespace Gas_System
             this.label3 = new System.Windows.Forms.Label();
             this.TimePicker = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ClearButton = new System.Windows.Forms.Button();
             this.PrintButton = new System.Windows.Forms.Button();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -205,19 +205,20 @@ namespace Gas_System
             this.dataGridView1.Size = new System.Drawing.Size(991, 575);
             this.dataGridView1.TabIndex = 18;
             // 
-            // button2
+            // ClearButton
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(920, 674);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(83, 26);
-            this.button2.TabIndex = 27;
-            this.button2.Text = "清除";
-            this.button2.UseVisualStyleBackColor = false;
+            this.ClearButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ClearButton.FlatAppearance.BorderSize = 0;
+            this.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ClearButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClearButton.ForeColor = System.Drawing.Color.White;
+            this.ClearButton.Location = new System.Drawing.Point(920, 674);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(83, 26);
+            this.ClearButton.TabIndex = 27;
+            this.ClearButton.Text = "清除";
+            this.ClearButton.UseVisualStyleBackColor = false;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // PrintButton
             // 
@@ -237,7 +238,7 @@ namespace Gas_System
             // 瓦斯行明細查詢
             // 
             this.ClientSize = new System.Drawing.Size(1016, 709);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel5);
@@ -271,7 +272,7 @@ namespace Gas_System
         private System.Windows.Forms.TextBox Filter;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox FromFilter;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Button PrintButton;
         private System.Windows.Forms.DateTimePicker TimePicker;
     }

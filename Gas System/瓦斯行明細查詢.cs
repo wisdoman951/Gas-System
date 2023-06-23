@@ -213,5 +213,14 @@ namespace Gas_System
             }
         }
 
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            FromDay.Text = "";
+            FromSource.Text = "";
+            FromFilter.Text = "";
+            Filter.Text = "";
+            TimePicker.Text = "";
+            dataGridView1.DataSource = null;
+        }
     }
 }

@@ -9,14 +9,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Configuration;
+using System.IO;
 
 namespace Gas_System
+    // 這一面的code跟其他頁面的編排邏輯不太一樣, 為了分頁
 {
     public partial class 瓦斯桶登錄 : Form
     {
         //連接資料庫
         private readonly string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
         private readonly string companyId;
+
+        //分頁功能
+        private const int pageSize = 3;
+        private int currentPage = 0;
+        private int totalPageCount = 0;
+
 
         public 瓦斯桶登錄(string companyId)
         {
@@ -31,19 +39,48 @@ namespace Gas_System
 
         private void 瓦斯桶登錄_Load(object sender, EventArgs e)
         {
-            //設定dataGridView與資料表連接
-            string query = $"SELECT * FROM `gas` WHERE GAS_Company_Id = '{companyId}'";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            CalculateTotalPages();
+            LoadData();
+        }
+        private void CalculateTotalPages()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
-                {
-                    DataTable table = new DataTable();
-                    adapter.Fill(table);
-                    dataGridView1.DataSource = table;
-                    // ... Additional code to customize the DataGridView
-                }
+                conn.Open();
+
+                MySqlCommand countCmd = new MySqlCommand($"SELECT COUNT(*) FROM gas WHERE GAS_Company_Id = @CompanyId", conn);
+                countCmd.Parameters.AddWithValue("@CompanyId", companyId);
+                int totalRecords = Convert.ToInt32(countCmd.ExecuteScalar());
+                totalPageCount = (int)Math.Ceiling((double)totalRecords / pageSize);
+
+                conn.Close();
             }
+        }
+        private void LoadData()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+
+                int offset = currentPage * pageSize;
+
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM gas WHERE GAS_Company_Id = @CompanyId LIMIT {offset}, {pageSize}", conn);
+                cmd.Parameters.AddWithValue("@CompanyId", companyId);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                dataGridView1.DataSource = dt;
+                conn.Close();
+
+                currentPageLabel.Text = (currentPage + 1).ToString();
+                totalPagesLabel.Text = totalPageCount.ToString();
+            }
+        }
+        private void RefreshDataGridView()
+        {
+            currentPage = 0;
+            LoadData();
         }
         private void ShowAll_Click(object sender, EventArgs e)
         {
@@ -91,21 +128,6 @@ namespace Gas_System
             }
         }
 
-        private void RefreshDataGridView()
-        {
-            // Refresh the DataGridView
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM gas WHERE GAS_Company_Id = @CompanyId", conn);
-                cmd.Parameters.AddWithValue("@CompanyId", companyId);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dataGridView1.DataSource = dt;
-                conn.Close();
-            }
-        }
 
         private void delete_Click(object sender, EventArgs e)
         {
@@ -193,16 +215,86 @@ namespace Gas_System
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void nextButton_Click(object sender, EventArgs e)
         {
-
+            currentPage++;
+            LoadData();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void previousButton_Click(object sender, EventArgs e)
         {
-
+            if (currentPage > 0)
+            {
+                currentPage--;
+                LoadData();
+            }
+        }
+        private void firstPageButton_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 0)
+            {
+                currentPage = 0;
+                LoadData();
+            }
         }
 
+        private void lastPageButton_Click(object sender, EventArgs e)
+        {
+            if (currentPage < totalPageCount - 1)
+            {
+                currentPage = totalPageCount - 1;
+                LoadData();
+            }
+        }
 
+        private void PrintButton_Click(object sender, EventArgs e)
+        {
+            // Create a SaveFileDialog to select the file path and name
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
+                saveFileDialog.Title = "Save CSV file";
+                saveFileDialog.ShowDialog();
+
+                // If the user clicked the "Save" button
+                if (saveFileDialog.FileName != "")
+                {
+                    try
+                    {
+                        // Create the CSV file and write the column headers
+                        StringBuilder csvContent = new StringBuilder();
+                        for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                        {
+                            csvContent.Append(dataGridView1.Columns[i].HeaderText);
+                            if (i < dataGridView1.Columns.Count - 1)
+                                csvContent.Append(",");
+                        }
+                        csvContent.AppendLine();
+
+                        // Write the data rows to the CSV file
+                        foreach (DataGridViewRow row in dataGridView1.Rows)
+                        {
+                            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                            {
+                                if (row.Cells[i].Value != null)
+                                    csvContent.Append(row.Cells[i].Value.ToString());
+                                if (i < dataGridView1.Columns.Count - 1)
+                                    csvContent.Append(",");
+                            }
+                            csvContent.AppendLine();
+                        }
+
+                        // Save the CSV file
+                        File.WriteAllText(saveFileDialog.FileName, csvContent.ToString());
+
+                        MessageBox.Show("CSV file saved successfully.", "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error saving CSV file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
     }
 }

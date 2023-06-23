@@ -273,6 +273,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="aa3qz-sa2l4-001.ico" />
+    <None Include="Resources\next.png" />
+    <None Include="Resources\previous.png" />
+    <None Include="Resources\right-arrow.png" />
+    <None Include="Resources\left.png" />
     <None Include="Resources\DEYU.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

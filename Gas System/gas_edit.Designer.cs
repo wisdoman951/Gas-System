@@ -309,7 +309,6 @@ namespace Gas_System
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "gas_edit";
             this.Text = "gas";
-            this.Load += new System.EventHandler(this.gas_edit_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
