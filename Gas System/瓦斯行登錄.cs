@@ -25,6 +25,11 @@ namespace Gas_System
         private void 瓦斯行登錄_Load(object sender, EventArgs e)
         {
             //設定dataGridView與資料表連接
+            RefreshDataGridView();
+        }
+
+        private void RefreshDataGridView()
+        {
             string query = "SELECT * FROM `company`";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -43,17 +48,32 @@ namespace Gas_System
             //開啟瓦斯行資料頁面
             //新增一筆資料
             company f1;
-            f1 = new company();
+            f1 = new company(null);
             f1.ShowDialog();
+
+            // Refresh the DataGridView after adding a new entry
+            RefreshDataGridView();
         }
 
         private void edit_Click(object sender, EventArgs e)
         {
-            //開啟基本用戶資料頁面
-            //編輯修改某筆資料
-            company f1;
-            f1 = new company();
-            f1.ShowDialog();
+            // Get the selected row
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                // Get the Company_ID of the selected row
+                string companyId = dataGridView1.SelectedRows[0].Cells["Company_ID"].Value.ToString();
+
+                // Pass the companyId to the edit form
+                company f1 = new company(companyId);
+                f1.ShowDialog();
+
+                // Refresh the DataGridView after editing
+                RefreshDataGridView();
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to edit.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void delete_Click(object sender, EventArgs e)
@@ -64,7 +84,7 @@ namespace Gas_System
                 DialogResult result = MessageBox.Show("确定删除此行資料？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    string id = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                    string id = dataGridView1.SelectedRows[0].Cells["Company_ID"].Value.ToString();
                     string query = "DELETE FROM `company` WHERE `Company_ID` = @Company_ID";
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
@@ -126,18 +146,7 @@ namespace Gas_System
         //刷新dataGridView的顯示資料
         private void refreshButton_Click(object sender, EventArgs e)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM company", conn);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-
-                da.Fill(dt);
-                dataGridView1.DataSource = dt;
-                conn.Close();
-            }
+            RefreshDataGridView();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

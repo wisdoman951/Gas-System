@@ -24,8 +24,19 @@ namespace Gas_System
 
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void AddComfirmButton_Click(object sender, EventArgs e)
         {
+            // Perform validation
+            if (string.IsNullOrEmpty(GasCompanyID.Text) || string.IsNullOrEmpty(GasWeightFull.Text) ||
+                string.IsNullOrEmpty(GasWeightEmpty.Text) || string.IsNullOrEmpty(GasType.Text) ||
+                string.IsNullOrEmpty(GasVolume.Text) || string.IsNullOrEmpty(GasSupplier.Text) ||
+                string.IsNullOrEmpty(GasExamineDay.Text) || string.IsNullOrEmpty(GasProduceDay.Text))
+            {
+                MessageBox.Show("All fields are required. Please fill in all the fields.", "Validation Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; // Stop further processing
+            }
+
             //連接資料庫
             string connStr = ConfigurationManager.AppSettings["ConnectionString"];
             using (MySqlConnection conn = new MySqlConnection(connStr))
@@ -33,16 +44,19 @@ namespace Gas_System
                 conn.Open();
 
                 //新增一筆資料
-                string insertQuery = "INSERT INTO gas (Gas_ID,Gas_Company_ID,Gas_Weight_Full,Gas_Type,Gas_Volume,Gas_Examine_Day,Gas_Produced_Day,Registered_at) VALUES (@Gas_ID,@Gas_Weight_Full,@Gas_Type,@Gas_Volume,@Gas_Examine_Day,@Gas_Produced_Day,NOW())";
+                string insertQuery = "INSERT INTO gas (Gas_Company_ID, Gas_Weight_Full, Gas_Weight_Empty, Gas_Type, Gas_Volume, Gas_supplier, Gas_Examine_Day, Gas_Produce_Day, Gas_price, Gas_Registration_Time) " +
+                    "VALUES (@Gas_Company_ID, @Gas_Weight_Full, @Gas_Weight_Empty, @Gas_Type, @Gas_Volume, @Gas_supplier, STR_TO_DATE(@Gas_Examine_Day, '%Y年%m月%d日'), STR_TO_DATE(@Gas_Produce_Day, '%Y年%m月%d日'), NOW())";
 
                 MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
-                cmd.Parameters.AddWithValue("@Gas_ID", id.Text);
-                cmd.Parameters.AddWithValue("@Gas_Weight_Full", Weight_Full.Text);
-                cmd.Parameters.AddWithValue("@Gas_Type", type.Text);
-                cmd.Parameters.AddWithValue("@Gas_Volume", volume.Text);
-                cmd.Parameters.AddWithValue("@Gas_Examine_Day", dateTimePicker1.Text);
-                cmd.Parameters.AddWithValue("@Gas_Produced_Day", dateTimePicker2.Text);
-
+                cmd.Parameters.AddWithValue("@Gas_Company_ID", GasCompanyID.Text);
+                cmd.Parameters.AddWithValue("@Gas_Weight_Full", GasWeightFull.Text);
+                cmd.Parameters.AddWithValue("@Gas_Weight_Empty", GasWeightEmpty.Text);
+                cmd.Parameters.AddWithValue("@Gas_Type", GasType.Text);
+                cmd.Parameters.AddWithValue("@Gas_Volume", GasVolume.Text);
+                cmd.Parameters.AddWithValue("@Gas_Supplier", GasSupplier.Text);
+                cmd.Parameters.AddWithValue("@Gas_Examine_Day", GasExamineDay.Text);
+                cmd.Parameters.AddWithValue("@Gas_Produce_Day", GasProduceDay.Text);
+                cmd.Parameters.AddWithValue("@Gas_Price", GasPrice.Text);
 
                 if (cmd.ExecuteNonQuery() == 1)
                 {
@@ -53,8 +67,8 @@ namespace Gas_System
                 {
                     MessageBox.Show("登錄失敗！");
                 }
-
             }
         }
+
     }
 }

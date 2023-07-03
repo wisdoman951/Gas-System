@@ -1,7 +1,7 @@
 ﻿
 namespace Gas_System
 {
-    partial class gas
+    partial class gas_edit
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,7 @@ namespace Gas_System
             this.label6 = new System.Windows.Forms.Label();
             this.GasWeightEmpty = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button15 = new System.Windows.Forms.Button();
+            this.UpdateButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.GasProduceDay = new System.Windows.Forms.DateTimePicker();
             this.GasExamineDay = new System.Windows.Forms.DateTimePicker();
@@ -139,33 +139,33 @@ namespace Gas_System
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(22, 306);
+            this.label7.Location = new System.Drawing.Point(22, 293);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(138, 22);
             this.label7.TabIndex = 73;
             this.label7.Text = "出場耐壓試驗日期";
             // 
-            // button15
+            // UpdateButton
             // 
-            this.button15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
-            this.button15.FlatAppearance.BorderSize = 0;
-            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button15.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button15.ForeColor = System.Drawing.Color.White;
-            this.button15.Location = new System.Drawing.Point(230, 380);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(83, 26);
-            this.button15.TabIndex = 75;
-            this.button15.Text = "儲存";
-            this.button15.UseVisualStyleBackColor = false;
-            this.button15.Click += new System.EventHandler(this.AddComfirmButton_Click);
+            this.UpdateButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
+            this.UpdateButton.FlatAppearance.BorderSize = 0;
+            this.UpdateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UpdateButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateButton.ForeColor = System.Drawing.Color.White;
+            this.UpdateButton.Location = new System.Drawing.Point(230, 364);
+            this.UpdateButton.Name = "UpdateButton";
+            this.UpdateButton.Size = new System.Drawing.Size(83, 26);
+            this.UpdateButton.TabIndex = 75;
+            this.UpdateButton.Text = "儲存";
+            this.UpdateButton.UseVisualStyleBackColor = false;
+            this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label8.Location = new System.Drawing.Point(54, 346);
+            this.label8.Location = new System.Drawing.Point(54, 333);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 22);
             this.label8.TabIndex = 76;
@@ -173,14 +173,14 @@ namespace Gas_System
             // 
             // GasProduceDay
             // 
-            this.GasProduceDay.Location = new System.Drawing.Point(166, 300);
+            this.GasProduceDay.Location = new System.Drawing.Point(166, 287);
             this.GasProduceDay.Name = "GasProduceDay";
             this.GasProduceDay.Size = new System.Drawing.Size(147, 28);
             this.GasProduceDay.TabIndex = 77;
             // 
             // GasExamineDay
             // 
-            this.GasExamineDay.Location = new System.Drawing.Point(166, 340);
+            this.GasExamineDay.Location = new System.Drawing.Point(166, 327);
             this.GasExamineDay.Name = "GasExamineDay";
             this.GasExamineDay.Size = new System.Drawing.Size(147, 28);
             this.GasExamineDay.TabIndex = 78;
@@ -261,28 +261,28 @@ namespace Gas_System
             this.GasPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(239)))), ((int)(((byte)(243)))));
             this.GasPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GasPrice.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GasPrice.Location = new System.Drawing.Point(166, 265);
+            this.GasPrice.Location = new System.Drawing.Point(166, 261);
             this.GasPrice.Name = "GasPrice";
             this.GasPrice.Size = new System.Drawing.Size(97, 20);
-            this.GasPrice.TabIndex = 87;
+            this.GasPrice.TabIndex = 89;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label12.Location = new System.Drawing.Point(118, 264);
+            this.label12.Location = new System.Drawing.Point(118, 260);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(42, 22);
-            this.label12.TabIndex = 86;
+            this.label12.TabIndex = 88;
             this.label12.Text = "價格";
             // 
-            // gas
+            // gas_edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(354, 434);
+            this.ClientSize = new System.Drawing.Size(354, 402);
             this.Controls.Add(this.GasPrice);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -295,7 +295,7 @@ namespace Gas_System
             this.Controls.Add(this.GasExamineDay);
             this.Controls.Add(this.GasProduceDay);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.button15);
+            this.Controls.Add(this.UpdateButton);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.GasWeightEmpty);
@@ -307,9 +307,8 @@ namespace Gas_System
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "gas";
+            this.Name = "gas_edit";
             this.Text = "gas";
-            this.Load += new System.EventHandler(this.gas_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,7 +325,7 @@ namespace Gas_System
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox GasWeightEmpty;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button UpdateButton;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker GasProduceDay;
         private System.Windows.Forms.DateTimePicker GasExamineDay;
