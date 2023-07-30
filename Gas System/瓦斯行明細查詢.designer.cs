@@ -36,16 +36,16 @@ namespace Gas_System
             this.Filter = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.FromFilter = new System.Windows.Forms.ComboBox();
-            this.FromDay = new System.Windows.Forms.TextBox();
+            this.day = new System.Windows.Forms.TextBox();
             this.SearchButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.FromSource = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.TimePicker = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ClearButton = new System.Windows.Forms.Button();
-            this.PrintButton = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.TimePicker = new System.Windows.Forms.DateTimePicker();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +57,7 @@ namespace Gas_System
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(114)))));
             this.label1.Location = new System.Drawing.Point(3, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 22);
+            this.label1.Size = new System.Drawing.Size(112, 27);
             this.label1.TabIndex = 1;
             this.label1.Text = "瓦斯桶登錄";
             // 
@@ -76,7 +76,7 @@ namespace Gas_System
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(114)))));
             this.label2.Location = new System.Drawing.Point(3, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 22);
+            this.label2.Size = new System.Drawing.Size(112, 27);
             this.label2.TabIndex = 0;
             this.label2.Text = "瓦斯桶登錄";
             // 
@@ -85,7 +85,7 @@ namespace Gas_System
             this.panel5.Controls.Add(this.Filter);
             this.panel5.Controls.Add(this.label6);
             this.panel5.Controls.Add(this.FromFilter);
-            this.panel5.Controls.Add(this.FromDay);
+            this.panel5.Controls.Add(this.day);
             this.panel5.Controls.Add(this.SearchButton);
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.FromSource);
@@ -101,7 +101,7 @@ namespace Gas_System
             // 
             this.Filter.Location = new System.Drawing.Point(713, 10);
             this.Filter.Name = "Filter";
-            this.Filter.Size = new System.Drawing.Size(164, 22);
+            this.Filter.Size = new System.Drawing.Size(164, 25);
             this.Filter.TabIndex = 29;
             // 
             // label6
@@ -111,7 +111,7 @@ namespace Gas_System
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(114)))));
             this.label6.Location = new System.Drawing.Point(681, 9);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(26, 22);
+            this.label6.Size = new System.Drawing.Size(32, 27);
             this.label6.TabIndex = 28;
             this.label6.Text = "為";
             // 
@@ -120,16 +120,16 @@ namespace Gas_System
             this.FromFilter.FormattingEnabled = true;
             this.FromFilter.Location = new System.Drawing.Point(554, 11);
             this.FromFilter.Name = "FromFilter";
-            this.FromFilter.Size = new System.Drawing.Size(121, 20);
+            this.FromFilter.Size = new System.Drawing.Size(121, 23);
             this.FromFilter.TabIndex = 27;
             this.FromFilter.SelectedIndexChanged += new System.EventHandler(this.FromFilter_SelectedIndexChanged);
             // 
-            // FromDay
+            // day
             // 
-            this.FromDay.Location = new System.Drawing.Point(80, 10);
-            this.FromDay.Name = "FromDay";
-            this.FromDay.Size = new System.Drawing.Size(100, 22);
-            this.FromDay.TabIndex = 26;
+            this.day.Location = new System.Drawing.Point(80, 10);
+            this.day.Name = "day";
+            this.day.Size = new System.Drawing.Size(100, 25);
+            this.day.TabIndex = 26;
             // 
             // SearchButton
             // 
@@ -153,7 +153,7 @@ namespace Gas_System
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(114)))));
             this.label5.Location = new System.Drawing.Point(400, 8);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 22);
+            this.label5.Size = new System.Drawing.Size(148, 27);
             this.label5.TabIndex = 22;
             this.label5.Text = "資料(並)篩選出";
             // 
@@ -162,7 +162,7 @@ namespace Gas_System
             this.FromSource.FormattingEnabled = true;
             this.FromSource.Location = new System.Drawing.Point(268, 11);
             this.FromSource.Name = "FromSource";
-            this.FromSource.Size = new System.Drawing.Size(121, 20);
+            this.FromSource.Size = new System.Drawing.Size(121, 23);
             this.FromSource.TabIndex = 21;
             this.FromSource.SelectedIndexChanged += new System.EventHandler(this.FromSource_SelectedIndexChanged);
             // 
@@ -173,7 +173,7 @@ namespace Gas_System
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(114)))));
             this.label4.Location = new System.Drawing.Point(189, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 22);
+            this.label4.Size = new System.Drawing.Size(72, 27);
             this.label4.TabIndex = 20;
             this.label4.Text = "天內的";
             // 
@@ -184,16 +184,9 @@ namespace Gas_System
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(114)))));
             this.label3.Location = new System.Drawing.Point(3, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 22);
+            this.label3.Size = new System.Drawing.Size(72, 27);
             this.label3.TabIndex = 18;
             this.label3.Text = "搜尋近";
-            // 
-            // TimePicker
-            // 
-            this.TimePicker.Location = new System.Drawing.Point(713, 10);
-            this.TimePicker.Name = "TimePicker";
-            this.TimePicker.Size = new System.Drawing.Size(170, 22);
-            this.TimePicker.TabIndex = 30;
             // 
             // dataGridView1
             // 
@@ -205,41 +198,46 @@ namespace Gas_System
             this.dataGridView1.Size = new System.Drawing.Size(991, 575);
             this.dataGridView1.TabIndex = 18;
             // 
-            // ClearButton
+            // button2
             // 
-            this.ClearButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.ClearButton.FlatAppearance.BorderSize = 0;
-            this.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ClearButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ClearButton.ForeColor = System.Drawing.Color.White;
-            this.ClearButton.Location = new System.Drawing.Point(920, 674);
-            this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(83, 26);
-            this.ClearButton.TabIndex = 27;
-            this.ClearButton.Text = "清除";
-            this.ClearButton.UseVisualStyleBackColor = false;
-            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(920, 674);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(83, 26);
+            this.button2.TabIndex = 27;
+            this.button2.Text = "清除";
+            this.button2.UseVisualStyleBackColor = false;
             // 
-            // PrintButton
+            // button1
             // 
-            this.PrintButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
-            this.PrintButton.FlatAppearance.BorderSize = 0;
-            this.PrintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PrintButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PrintButton.ForeColor = System.Drawing.Color.White;
-            this.PrintButton.Location = new System.Drawing.Point(826, 674);
-            this.PrintButton.Name = "PrintButton";
-            this.PrintButton.Size = new System.Drawing.Size(83, 26);
-            this.PrintButton.TabIndex = 26;
-            this.PrintButton.Text = "匯出";
-            this.PrintButton.UseVisualStyleBackColor = false;
-            this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(144)))), ((int)(((byte)(255)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(826, 674);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(83, 26);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "匯出";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // TimePicker
+            // 
+            this.TimePicker.Location = new System.Drawing.Point(713, 10);
+            this.TimePicker.Name = "TimePicker";
+            this.TimePicker.Size = new System.Drawing.Size(170, 25);
+            this.TimePicker.TabIndex = 30;
             // 
             // 瓦斯行明細查詢
             // 
             this.ClientSize = new System.Drawing.Size(1016, 709);
-            this.Controls.Add(this.ClearButton);
-            this.Controls.Add(this.PrintButton);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.label2);
@@ -268,12 +266,12 @@ namespace Gas_System
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox FromDay;
+        private System.Windows.Forms.TextBox day;
         private System.Windows.Forms.TextBox Filter;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox FromFilter;
-        private System.Windows.Forms.Button ClearButton;
-        private System.Windows.Forms.Button PrintButton;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DateTimePicker TimePicker;
     }
 }

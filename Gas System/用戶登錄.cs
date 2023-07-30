@@ -36,6 +36,21 @@ namespace Gas_System
                     dataGridView1.DataSource = table;
                 }
             }
+            // Columns rename
+            dataGridView1.Columns["CUSTOMER_Id"].HeaderText = "客戶編號";
+            dataGridView1.Columns["CUSTOMER_Name"].HeaderText = "客戶姓名";
+            dataGridView1.Columns["CUSTOMER_Sex"].HeaderText = "客戶性別";
+            dataGridView1.Columns["CUSTOMER_PhoneNo"].HeaderText = "客戶電話";
+            dataGridView1.Columns["CUSTOMER_Postal_Code"].HeaderText = "客戶郵遞區號";
+            dataGridView1.Columns["CUSTOMER_Address"].HeaderText = "客戶地址";
+            dataGridView1.Columns["CUSTOMER_HouseTelpNo"].HeaderText = "客戶家用電話";
+            dataGridView1.Columns["CUSTOMER_Password"].HeaderText = "客戶密碼";
+            dataGridView1.Columns["CUSTOMER_Email"].HeaderText = "客戶電子郵件";
+            dataGridView1.Columns["CUSTOMER_FamilyMemberId"].HeaderText = "客戶關係家人";
+            dataGridView1.Columns["COMPANY_Id"].HeaderText = "客戶瓦斯行";
+            dataGridView1.Columns["COMPANY_HistoryID"].HeaderText = "客戶歷史瓦斯行";
+            dataGridView1.Columns["CUSTOMER_Notes"].HeaderText = "客戶備註";
+            dataGridView1.Columns["CUSTOMER_Registration_Time"].HeaderText = "客戶註冊時間";
         }
 
         private void add_Click(object sender, EventArgs e)
