@@ -41,7 +41,26 @@ namespace Gas_System
                     DataTable table = new DataTable();
                     adapter.Fill(table);
                     dataGridView1.DataSource = table;
-                    // ... Additional code to customize the DataGridView
+
+                    // Set the sorting mode for the "GAS_Examine_Day" column to automatic
+                    dataGridView1.Columns["GAS_Examine_Day"].SortMode = DataGridViewColumnSortMode.Automatic;
+
+                    // Set the initial sorting order for the "GAS_Examine_Day" column to ascending
+                    dataGridView1.Sort(dataGridView1.Columns["GAS_Examine_Day"], ListSortDirection.Ascending);
+                    // Columns rename
+                    dataGridView1.Columns["GAS_Id"].HeaderText = "瓦斯桶編號";
+                    dataGridView1.Columns["GAS_Company_Id"].HeaderText = "所屬公司編號";
+                    dataGridView1.Columns["GAS_Weight_Full"].HeaderText = "滿桶重量";
+                    dataGridView1.Columns["GAS_Weight_Empty"].HeaderText = "空桶重量";
+                    dataGridView1.Columns["GAS_Type"].HeaderText = "瓦斯桶種類";
+                    dataGridView1.Columns["GAS_Price"].HeaderText = "瓦斯價格";
+                    dataGridView1.Columns["GAS_Volume"].HeaderText = "瓦斯桶容量";
+                    dataGridView1.Columns["GAS_Examine_Day"].HeaderText = "檢驗日期";
+                    dataGridView1.Columns["GAS_Produce_Day"].HeaderText = "出廠日期";
+                    dataGridView1.Columns["GAS_Supplier"].HeaderText = "供應商";
+                    dataGridView1.Columns["Gas_Registration_Time"].HeaderText = "瓦斯桶註冊時間";
+                    dataGridView1.Columns["last_worker_id"].HeaderText = "最後經手員工";
+                    dataGridView1.Columns["GAS_EXAMINE_Day"].HeaderText = "瓦斯桶檢測日期";
                 }
             }
         }
@@ -151,33 +170,7 @@ namespace Gas_System
         //刷新dataGridView的顯示資料
         private void refreshButton_Click(object sender, EventArgs e)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM gas", conn);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-
-                da.Fill(dt);
-                dataGridView1.DataSource = dt;
-                conn.Close();
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+            瓦斯桶登錄_Load(sender,e);
         }
     }
 }

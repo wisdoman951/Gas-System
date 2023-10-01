@@ -62,7 +62,7 @@ namespace Gas_System
             week.Text = DateTime.Now.ToString("dddd");
         }
 
-        
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             //Timer 控制時間的事件處理方法
@@ -116,7 +116,7 @@ namespace Gas_System
         {
             //開啟對應分頁
             openChildForm(new 用戶登錄());
-            
+
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -150,31 +150,113 @@ namespace Gas_System
             openChildForm(new 瓦斯通報());
 
         }
-        private void form_pl_Paint(object sender, PaintEventArgs e)
+        private async Task LoadData()
         {
-            //連接資料表
-            //string query = "SELECT * FROM `gas_order`";
-            string query = "SELECT o.ORDER_Id, c.CUSTOMER_PhoneNo, o.DELIVERY_Address, o.DELIVERY_Time, c.CUSTOMER_Name, od.Order_type, od.Order_weight,o.Gas_Quantity, o.COMPANY_Id FROM `gas_order` o JOIN`customer` c ON o.CUSTOMER_Id = c.CUSTOMER_Id JOIN `gas_order_detail` od ON o.ORDER_Id = od.Order_ID;";
+            string query = @"SELECT
+                            o.ORDER_Id,
+                            o.CUSTOMER_Id,
+                            o.COMPANY_Id,
+                            c.CUSTOMER_PhoneNo,
+                            o.DELIVERY_Address,
+                            o.DELIVERY_Time,
+                            c.CUSTOMER_Name,
+                            od.Order_type,
+                            od.Order_weight,
+                            o.Gas_Quantity,
+                            ca.Gas_Volume,
+                            a.WORKER_Id,
+                            w.WORKER_Name,
+                            o.sensor_id,
+                            (
+                                SELECT ROUND(((sh.SENSOR_Weight / 1000) - iot.Gas_Empty_Weight), 1) AS CurrentGasAmount
+                                FROM `sensor_history` sh
+                                JOIN `iot` iot ON sh.SENSOR_Id = iot.SENSOR_Id
+                                WHERE iot.CUSTOMER_Id = o.CUSTOMER_Id
+                                ORDER BY sh.SENSOR_Time DESC
+                                LIMIT 1
+                            ) AS CurrentGasAmount
+                        FROM `gas_order` o
+                        LEFT JOIN `customer` c ON o.CUSTOMER_Id = c.CUSTOMER_Id
+                        LEFT JOIN `gas_order_detail` od ON o.ORDER_Id = od.Order_ID
+                        LEFT JOIN `customer_accumulation` ca ON o.CUSTOMER_Id = ca.Customer_Id
+                        LEFT JOIN `assign` a ON o.ORDER_Id = a.ORDER_Id
+                        LEFT JOIN `worker` w ON a.WORKER_Id = w.WORKER_Id 
+                        WHERE o.DELIVERY_Condition = 0";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
+                await connection.OpenAsync();
+
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
                 {
+
                     DataTable table = new DataTable();
-                    adapter.Fill(table);
+                    await adapter.FillAsync(table);
+
+                    // Add columns for "送貨日期" and "送貨時間"
+                    table.Columns.Add("送貨日期", typeof(string));
+                    table.Columns.Add("送貨時間", typeof(string));
+                    // Set "未指派" if WORKER_Id is null or DBNull
+                    foreach (DataRow row in table.Rows)
+                    {
+                        if (row["WORKER_Id"] == null || row["WORKER_Id"] == DBNull.Value)
+                        {
+                            row["WORKER_Id"] = DBNull.Value; // Set to DBNull
+                        }
+                        if (DateTime.TryParse(row["DELIVERY_Time"].ToString(), out DateTime deliveryDateTime))
+                        {
+                            string deliveryDate = deliveryDateTime.ToString("yyyy-MM-dd");
+                            string deliveryTime = deliveryDateTime.ToString("HH:mm:ss");
+
+                            row["送貨日期"] = deliveryDate;
+                            row["送貨時間"] = deliveryTime;
+                        }
+                    }
 
                     dataGridView1.DataSource = table;
+                    dataGridView1.Columns["WORKER_Id"].Visible = false;
+                    dataGridView1.Columns["SENSOR_Id"].Visible = false;
+                    dataGridView1.Columns["CUSTOMER_Id"].Visible = false;
+
+
+                    // Columns rename
                     dataGridView1.Columns["ORDER_Id"].HeaderText = "訂單編號";
+                    dataGridView1.Columns["CUSTOMER_Id"].HeaderText = "顧客編號";
                     dataGridView1.Columns["CUSTOMER_PhoneNo"].HeaderText = "顧客電話";
                     dataGridView1.Columns["DELIVERY_Address"].HeaderText = "送貨地址";
-                    dataGridView1.Columns["DELIVERY_Time"].HeaderText = "送貨時間";
+                    dataGridView1.Columns["送貨日期"].HeaderText = "送貨日期"; // New column header
+                    dataGridView1.Columns["送貨時間"].HeaderText = "送貨時間"; // New column header
+                    dataGridView1.Columns["DELIVERY_Time"].Visible = false; // Hide the original DELIVERY_Time column
                     dataGridView1.Columns["CUSTOMER_Name"].HeaderText = "訂購人";
                     dataGridView1.Columns["Order_type"].HeaderText = "瓦斯桶種類";
                     dataGridView1.Columns["Order_weight"].HeaderText = "瓦斯規格";
                     dataGridView1.Columns["Gas_Quantity"].HeaderText = "數量";
-                    dataGridView1.Columns["COMPANY_Id"].HeaderText = "選擇瓦斯行";
+                    dataGridView1.Columns["Gas_Volume"].HeaderText = "顧客累積殘氣量";
+                    dataGridView1.Columns["WORKER_Name"].HeaderText = "派送人員";
+                    dataGridView1.Columns["sensor_id"].HeaderText = "感測器編號";
+                    dataGridView1.Columns["CurrentGasAmount"].HeaderText = "當前瓦斯量";
+
+                    // Columns reorder
+                    dataGridView1.Columns["ORDER_Id"].DisplayIndex = 0;
+                    dataGridView1.Columns["CUSTOMER_PhoneNo"].DisplayIndex = 2;
+                    dataGridView1.Columns["DELIVERY_Address"].DisplayIndex = 3;
+                    dataGridView1.Columns["送貨日期"].DisplayIndex = 4;
+                    dataGridView1.Columns["送貨時間"].DisplayIndex = 5;
+                    dataGridView1.Columns["CUSTOMER_Name"].DisplayIndex = 6;
+                    dataGridView1.Columns["Order_type"].DisplayIndex = 7;
+                    dataGridView1.Columns["Order_weight"].DisplayIndex = 8;
+                    dataGridView1.Columns["Gas_Quantity"].DisplayIndex = 9;
+                    dataGridView1.Columns["Gas_Volume"].DisplayIndex = 10;
+                    dataGridView1.Columns["WORKER_Name"].DisplayIndex = 11;
+                    dataGridView1.Columns["sensor_id"].DisplayIndex = 12;
+                    dataGridView1.Columns["CurrentGasAmount"].DisplayIndex = 1;
+
                 }
             }
+        }
+        private async void form_pl_Paint(object sender, PaintEventArgs e)
+        {   
+            await LoadData();
         }
 
 
@@ -205,10 +287,10 @@ namespace Gas_System
             //確認後，訂單將傳送至指定瓦斯行，後續由瓦斯行完成訂單的派送
         }
 
-        
-        private void RefreshButton_Click(object sender, EventArgs e)
+
+        private async void RefreshButton_Click(object sender, EventArgs e)
         {
-            //刷新dataGridView顯示的資料表
+            /*//刷新dataGridView顯示的資料表
             string query = "SELECT o.ORDER_Id, c.CUSTOMER_PhoneNo, o.DELIVERY_Address, o.DELIVERY_Time, c.CUSTOMER_Name, od.Order_type, od.Order_weight,o.Gas_Quantity, o.COMPANY_Id FROM `gas_order` o JOIN`customer` c ON o.CUSTOMER_Id = c.CUSTOMER_Id JOIN `gas_order_detail` od ON o.ORDER_Id = od.Order_ID;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -229,7 +311,8 @@ namespace Gas_System
                     dataGridView1.Columns["Gas_Quantity"].HeaderText = "數量";
                     dataGridView1.Columns["COMPANY_Id"].HeaderText = "選擇瓦斯行";
                 }
-            }
+            }*/
+            await LoadData();
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -301,15 +384,18 @@ namespace Gas_System
             {
                 connection.Open();
 
-                string query = @"SELECT *
-                                FROM gas_order_history
-                                WHERE CUSTOMER_Id = (
-                                    SELECT CUSTOMER_Id
-                                    FROM gas_order_history
-                                    WHERE ORDER_Id = @order_id
-                                )
-                                ORDER BY DELIVERY_Time DESC;
-                                ";
+                string query = "SELECT o.ORDER_Id, o.CUSTOMER_Id, o.Expect_Time, c.CUSTOMER_PhoneNo, o.DELIVERY_Address, o.Delivery_Time, c.CUSTOMER_Name, od.Order_type, od.Order_weight, o.Gas_Quantity, ca.Gas_Volume " +
+                               "FROM `gas_order` o " +
+                               "JOIN `customer` c ON o.CUSTOMER_Id = c.CUSTOMER_Id " +
+                               "JOIN `gas_order_detail` od ON o.ORDER_Id = od.Order_ID " +
+                               "JOIN `customer_accumulation` ca ON o.CUSTOMER_Id = ca.Customer_Id " +
+                               "WHERE o.DELIVERY_Condition = 1 " +
+                               "AND o.CUSTOMER_Id = (" +
+                               "    SELECT CUSTOMER_Id " +
+                               "    FROM gas_order " +
+                               "    WHERE ORDER_Id = @order_id" +
+                               ") " +
+                               "ORDER BY o.Delivery_Time DESC;";
 
                 DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
                 string order_id = selectedRow.Cells["Order_Id"].Value.ToString();
@@ -322,6 +408,18 @@ namespace Gas_System
                         DataTable historyOrders = new DataTable();
                         adapter.Fill(historyOrders);
 
+
+                        // Columns rename
+                        historyOrders.Columns["ORDER_Id"].ColumnName = "訂單編號";
+                        historyOrders.Columns["CUSTOMER_Id"].ColumnName = "顧客編號";
+                        historyOrders.Columns["CUSTOMER_PhoneNo"].ColumnName = "顧客電話";
+                        historyOrders.Columns["DELIVERY_Address"].ColumnName = "送貨地址";
+                        historyOrders.Columns["Expect_Time"].ColumnName = "送貨時間";
+                        historyOrders.Columns["CUSTOMER_Name"].ColumnName = "訂購人";
+                        historyOrders.Columns["Order_type"].ColumnName = "瓦斯桶種類";
+                        historyOrders.Columns["Order_weight"].ColumnName = "瓦斯規格";
+                        historyOrders.Columns["Gas_Quantity"].ColumnName = "數量";
+                        historyOrders.Columns["Gas_Volume"].ColumnName = "顧客累積殘氣量";
                         // Create an instance of the HistoryOrder form
                         HistoryOrder historyOrderForm = new HistoryOrder();
 

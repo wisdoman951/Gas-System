@@ -35,6 +35,11 @@ namespace Gas_System
 
                     dataGridView1.DataSource = table;
                 }
+
+                dataGridView1.Columns["Accum_Id"].HeaderText = "累計編號";
+                dataGridView1.Columns["Gas_Volume"].HeaderText = "殘氣存量";
+                dataGridView1.Columns["Customer_Id"].HeaderText = "顧客編號";
+                dataGridView1.Columns["Company_Id"].HeaderText = "所屬公司編號";
             }
         }
 

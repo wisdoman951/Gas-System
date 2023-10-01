@@ -40,6 +40,17 @@ namespace Gas_System
 
                     dataGridView1.DataSource = table;
                 }
+                dataGridView1.Columns["COMPANY_Id"].HeaderText = "公司編號";
+                dataGridView1.Columns["COMPANY_Name"].HeaderText = "公司名稱";
+                dataGridView1.Columns["COMPANY_Phone_No"].HeaderText = "公司電話";
+                dataGridView1.Columns["COMPANY_City"].HeaderText = "公司城市";
+                dataGridView1.Columns["COMPANY_District"].HeaderText = "公司區域";
+                dataGridView1.Columns["COMPANY_Address"].HeaderText = "公司地址";
+                dataGridView1.Columns["COMPANY_Notes"].HeaderText = "備註";
+
+                dataGridView1.Columns["COMPANY_Notes"].Visible = false;
+                dataGridView1.Columns["COMPANY_Text_Id"].Visible = false;
+                dataGridView1.Columns["COMPANY_Registration_Time"].Visible = false;
             }
         }
 

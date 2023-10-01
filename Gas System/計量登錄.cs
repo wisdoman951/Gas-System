@@ -34,6 +34,12 @@ namespace Gas_System
 
                     dataGridView1.DataSource = table;
                 }
+                dataGridView1.Columns["SENSOR_Id"].HeaderText = "感測器編號";
+                dataGridView1.Columns["CUSTOMER_Id"].HeaderText = "使用者編號";
+                dataGridView1.Columns["SENSOR_GPS"].HeaderText = "感測器定位";
+                dataGridView1.Columns["Gas_Id"].HeaderText = "瓦斯桶編號";
+                dataGridView1.Columns["Gas_Empty_Weight"].HeaderText = "瓦斯空桶重";
+                dataGridView1.Columns["Gas_Original_Weight"].HeaderText = "瓦斯滿桶重";
             }
         }
 

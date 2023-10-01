@@ -25,32 +25,71 @@ namespace Gas_System
         private void 用戶登錄_Load(object sender, EventArgs e)
         {
             //設定dataGridView與資料表連接
-            string query = "SELECT * FROM `customer`";
+            string query = @"SELECT c.*, a.Alert_Volume, sh.SENSOR_Weight, i.Sensor_Id
+                 FROM customer c
+                 LEFT JOIN iot i ON c.CUSTOMER_Id = i.CUSTOMER_Id
+                 LEFT JOIN alert a ON i.Sensor_Id = a.Sensor_Id
+                 LEFT JOIN (
+                     SELECT *,
+                            ROW_NUMBER() OVER (PARTITION BY SENSOR_Id ORDER BY SENSOR_Time DESC) AS rn
+                     FROM sensor_history
+                 ) sh ON i.Sensor_Id = sh.SENSOR_Id AND sh.rn = 1";
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
                 {
                     DataTable table = new DataTable();
                     adapter.Fill(table);
-
                     dataGridView1.DataSource = table;
+
+                    //客戶要求不要顯示出這些欄位
+                    table.Columns.Remove("CUSTOMER_Password");
+                    table.Columns.Remove("COMPANY_Id");
+                    table.Columns.Remove("COMPANY_HistoryID");
+                    // Change the original column order
+                    string[] columnOrder = {
+                                            "CUSTOMER_Id",
+                                            "CUSTOMER_Name",
+                                            "CUSTOMER_Address",
+                                            "Sensor_Id",
+                                            "Alert_Volume",
+                                            "SENSOR_Weight",
+                                            "CUSTOMER_PhoneNo",
+                                            "CUSTOMER_Sex",
+                                            "CUSTOMER_Postal_Code",
+                                            "CUSTOMER_HouseTelpNo",
+                                            "CUSTOMER_Email",
+                                            "CUSTOMER_FamilyMemberId",
+                                            "CUSTOMER_Notes",
+                                            "CUSTOMER_Registration_Time"
+                                        };
+
+                    // Loop through the columns and set their display order
+                    foreach (string columnName in columnOrder)
+                    {
+                        if (dataGridView1.Columns.Contains(columnName))
+                        {
+                            dataGridView1.Columns[columnName].DisplayIndex = Array.IndexOf(columnOrder, columnName);
+                        }
+                    }
+                    // Columns rename
+                    dataGridView1.Columns["CUSTOMER_Id"].HeaderText = "客戶編號";
+                    dataGridView1.Columns["CUSTOMER_Name"].HeaderText = "客戶姓名";
+                    dataGridView1.Columns["Sensor_Id"].HeaderText = "感測器編號";
+                    dataGridView1.Columns["Alert_Volume"].HeaderText = "通報門檻";
+                    dataGridView1.Columns["SENSOR_Weight"].HeaderText = "當前瓦斯量";
+                    dataGridView1.Columns["CUSTOMER_Sex"].HeaderText = "客戶性別";
+                    dataGridView1.Columns["CUSTOMER_PhoneNo"].HeaderText = "客戶電話";
+                    dataGridView1.Columns["CUSTOMER_Postal_Code"].HeaderText = "客戶郵遞區號";
+                    dataGridView1.Columns["CUSTOMER_Address"].HeaderText = "客戶地址";
+                    dataGridView1.Columns["CUSTOMER_HouseTelpNo"].HeaderText = "客戶家用電話";
+                    dataGridView1.Columns["CUSTOMER_Email"].HeaderText = "客戶電子郵件";
+                    dataGridView1.Columns["CUSTOMER_FamilyMemberId"].HeaderText = "客戶關係家人";
+                    dataGridView1.Columns["CUSTOMER_Notes"].HeaderText = "客戶備註";
+                    dataGridView1.Columns["CUSTOMER_Registration_Time"].HeaderText = "客戶註冊時間";
                 }
             }
-            // Columns rename
-            dataGridView1.Columns["CUSTOMER_Id"].HeaderText = "客戶編號";
-            dataGridView1.Columns["CUSTOMER_Name"].HeaderText = "客戶姓名";
-            dataGridView1.Columns["CUSTOMER_Sex"].HeaderText = "客戶性別";
-            dataGridView1.Columns["CUSTOMER_PhoneNo"].HeaderText = "客戶電話";
-            dataGridView1.Columns["CUSTOMER_Postal_Code"].HeaderText = "客戶郵遞區號";
-            dataGridView1.Columns["CUSTOMER_Address"].HeaderText = "客戶地址";
-            dataGridView1.Columns["CUSTOMER_HouseTelpNo"].HeaderText = "客戶家用電話";
-            dataGridView1.Columns["CUSTOMER_Password"].HeaderText = "客戶密碼";
-            dataGridView1.Columns["CUSTOMER_Email"].HeaderText = "客戶電子郵件";
-            dataGridView1.Columns["CUSTOMER_FamilyMemberId"].HeaderText = "客戶關係家人";
-            dataGridView1.Columns["COMPANY_Id"].HeaderText = "客戶瓦斯行";
-            dataGridView1.Columns["COMPANY_HistoryID"].HeaderText = "客戶歷史瓦斯行";
-            dataGridView1.Columns["CUSTOMER_Notes"].HeaderText = "客戶備註";
-            dataGridView1.Columns["CUSTOMER_Registration_Time"].HeaderText = "客戶註冊時間";
         }
 
         private void add_Click(object sender, EventArgs e)

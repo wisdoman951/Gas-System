@@ -210,7 +210,6 @@ namespace Gas_System
             this.label2.Size = new System.Drawing.Size(639, 23);
             this.label2.TabIndex = 23;
             this.label2.Text = "若無顯示資料，請返回「瓦斯行登錄」點擊瓦斯行後返回，或點選「顯示全部」按鈕";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // 瓦斯桶登錄
             // 
