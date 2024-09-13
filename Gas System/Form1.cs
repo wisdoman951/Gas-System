@@ -31,8 +31,8 @@ namespace Gas_System
         private void btlogin_Click(object sender, EventArgs e)
         {
             //輸入格若為空值，顯示提示訊息
-            string email = textBox1.Text;
-            string password = textBox2.Text;
+            string email = textBox1.Text; //帳號輸入欄位
+            string password = textBox2.Text; //密碼輸入欄位
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
@@ -46,9 +46,10 @@ namespace Gas_System
                 conn.Open();
                  MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = @"SELECT Manager_ID FROM manager_account WHERE MANAGER_Email = @Email AND MANAGER_Password = @Password;";
-                cmd.Parameters.AddWithValue("@Email", email);
-                cmd.Parameters.AddWithValue("@Password", password);
+                // SQL 語法主要寫在這
+                cmd.CommandText = @"SELECT Manager_ID FROM manager_account WHERE MANAGER_Email = @Email AND MANAGER_Password = @Password;"; 
+                cmd.Parameters.AddWithValue("@Email", email); //插入
+                cmd.Parameters.AddWithValue("@Password", password); //插入
                 object result = cmd.ExecuteScalar();
 
                 if (result != null)
@@ -65,7 +66,6 @@ namespace Gas_System
                     MessageBox.Show("帳號或密碼錯誤。");
                 }
             }
-
         }
 
         

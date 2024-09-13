@@ -32,7 +32,7 @@ namespace Gas_System
         private void 瓦斯桶登錄_Load(object sender, EventArgs e)
         {
             //設定dataGridView與資料表連接
-            string query = $"SELECT * FROM `gas` WHERE GAS_Company_Id = '{companyId}'";
+            string query = $"SELECT * FROM `gas` WHERE GAS_Company_Id = '{companyId}' AND Company_ID=Manager_ID";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {

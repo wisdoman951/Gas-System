@@ -142,6 +142,7 @@ namespace Gas_System
             //開啟對應分頁
             openChildForm(new 計量登錄());
         }
+
         private void button9_Click(object sender, EventArgs e)
         {
             //開啟安全存量通知的頁面
@@ -407,7 +408,6 @@ namespace Gas_System
                     {
                         DataTable historyOrders = new DataTable();
                         adapter.Fill(historyOrders);
-
 
                         // Columns rename
                         historyOrders.Columns["ORDER_Id"].ColumnName = "訂單編號";
